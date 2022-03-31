@@ -10,7 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2">
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.AssessmentDetails"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CourseDetails"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TermDetails"
+            android:exported="false" />
+        <activity
+            android:name=".UI.AssessmentList"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CourseList"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TermList"
+            android:exported="false" />
+        <activity
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
