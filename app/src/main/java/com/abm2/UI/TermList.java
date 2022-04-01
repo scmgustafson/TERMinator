@@ -2,20 +2,36 @@ package com.abm2.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.abm2.R;
 
+import java.util.Calendar;
+
 public class TermList extends AppCompatActivity {
+
+    private EditText startDateText;
+    private DatePickerDialog startDatePickerDialog;
+    private ImageView startDateImg;
+
+    private int date, month, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
+
+        startDateText = findViewById(R.id.startDateText);
+        startDateImg = findViewById(R.id.startDateImg);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,7 +49,22 @@ public class TermList extends AppCompatActivity {
     }
 
     public void OnFloatingActionClick(View view) {
-        Intent intent = new Intent(TermList.this, AddTerm.class); //Create an intent to move from this activity to TermList activity
-        startActivity(intent); //Pass intent into startActivity method
+
+    }
+
+    public void onStartDateImgClick(View view) {
+        final Calendar cal = Calendar.getInstance();
+        date = cal.get(Calendar.DATE);
+        month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_DeviceDefault_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        startDateText.setText(month+"-"+date+"-"+year);
+                    }
+                }, year, date, month);
+        datePickerDialog.show();
     }
 }

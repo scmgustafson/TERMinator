@@ -7,10 +7,10 @@
     tools:context=".UI.TermList">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/addNewTerm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your terms:"
+        android:text="Add New Term:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,6 +18,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <EditText
+        android:id="@+id/termTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Term Title"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@id/addNewTerm"
+        app:layout_constraintTop_toBottomOf="@+id/addNewTerm" />
+
+    <EditText
+        android:id="@+id/startDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Start Date"
+        android:textAlignment="center"
+        android:editable="false"
+        app:layout_constraintLeft_toLeftOf="@id/addNewTerm"
+        app:layout_constraintTop_toBottomOf="@+id/termTitleText" />
+
+    <ImageView
+        android:id="@+id/startDateImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:onClick="onStartDateImgClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/startDateText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.149"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <TextView
+        android:id="@+id/yourTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Terms:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -27,9 +75,10 @@
         android:onClick="OnFloatingActionClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".9"
+        app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/ic_baseline_add_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
