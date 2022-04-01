@@ -14,13 +14,13 @@ import android.widget.ImageView;
 
 import com.abm2.R;
 
+import java.time.ZoneOffset;
 import java.util.Calendar;
 
 public class TermList extends AppCompatActivity {
 
     private EditText startDateText;
-    private DatePickerDialog startDatePickerDialog;
-    private ImageView startDateImg;
+    private EditText endDateText;
 
     private int date, month, year;
 
@@ -30,7 +30,7 @@ public class TermList extends AppCompatActivity {
         setContentView(R.layout.activity_term_list);
 
         startDateText = findViewById(R.id.startDateText);
-        startDateImg = findViewById(R.id.startDateImg);
+        endDateText = findViewById(R.id.endDateText);
 
     }
 
@@ -58,13 +58,34 @@ public class TermList extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_DeviceDefault_Dialog,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        month += 1;
                         startDateText.setText(month+"-"+date+"-"+year);
                     }
                 }, year, date, month);
         datePickerDialog.show();
+    }
+
+    public void onEndDateImgClick(View view) {
+        final Calendar cal = Calendar.getInstance();
+        date = cal.get(Calendar.DATE);
+        month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        month += 1;
+                        endDateText.setText(month+"-"+date+"-"+year);
+                    }
+                }, year, date, month);
+        datePickerDialog.show();
+    }
+
+    public void onExpandImgClick(View view) {
     }
 }
