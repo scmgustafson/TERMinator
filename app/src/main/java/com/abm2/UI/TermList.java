@@ -48,10 +48,6 @@ public class TermList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void OnFloatingActionClick(View view) {
-
-    }
-
     public void onStartDateImgClick(View view) {
         final Calendar cal = Calendar.getInstance();
         date = cal.get(Calendar.DATE);
@@ -84,5 +80,14 @@ public class TermList extends AppCompatActivity {
                     }
                 }, year, date, month);
         datePickerDialog.show();
+    }
+
+    public void onAddBtnClick(View view) {
+
+    }
+
+    public void onTermTitleTextClick(View view) {
+        Intent intent = new Intent(TermList.this, TermDetailsCourseList.class);
+        startActivity(intent);
     }
 }

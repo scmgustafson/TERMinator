@@ -6,114 +6,126 @@
     android:layout_height="match_parent"
     tools:context=".UI.TermList">
 
-    <TextView
-        android:id="@+id/addNewTerm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Add New Term:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/addNewTerm"
-        app:layout_constraintTop_toBottomOf="@id/addNewTerm"
-        tools:layout_editor_absoluteY="24dp">
-
-        <EditText
-            android:id="@+id/termTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:ems="10"
-            android:hint="Term Title"
-            android:inputType="text"
-            android:textAlignment="center" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/startDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="7dp"
-                android:editable="false"
-                android:ems="10"
-                android:hint="Start Date"
-                android:textAlignment="center" />
-
-            <ImageView
-                android:id="@+id/startDateImg"
-                android:layout_width="51dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="8dp"
-                android:onClick="onStartDateImgClick"
-                app:srcCompat="@drawable/ic_baseline_add_24" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/endDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:editable="false"
-                android:ems="10"
-                android:hint="End Date"
-                android:textAlignment="center" />
-
-            <ImageView
-                android:id="@+id/endDateImg"
-                android:layout_width="51dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="8dp"
-                android:onClick="onEndDateImgClick"
-                app:srcCompat="@drawable/ic_baseline_add_24" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/addBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/yourTerms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Your Terms:"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="@id/addNewTerm"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="OnFloatingActionClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textAddNewCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Term:"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/courseTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="Term Title"
+                android:inputType="text"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/startDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="7dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:hint="Start Date"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/startDateImg"
+                    android:layout_width="51dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="8dp"
+                    android:onClick="onStartDateImgClick"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/endDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:editable="false"
+                    android:ems="10"
+                    android:hint="End Date"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/endDateImg"
+                    android:layout_width="51dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="8dp"
+                    android:onClick="onEndDateImgClick"
+                    app:srcCompat="@drawable/ic_baseline_add_24" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:onClick="onAddBtnClick"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textTermCourses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Your Terms:"
+            android:textSize="20sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textCourseTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onTermTitleTextClick"
+                    android:text="COURSE TITLE"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

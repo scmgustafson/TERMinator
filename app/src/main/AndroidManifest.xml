@@ -12,14 +12,17 @@
         <activity
             android:name=".UI.AssessmentDetails"
             android:label="Assessment Details"
+            android:parentActivityName=".UI.CourseDetailsAssessmentList"
             android:exported="false"/>
         <activity
             android:name=".UI.TermDetailsCourseList"
-            android:label="Term Details"
+            android:label="Term Details and Courses"
+            android:parentActivityName=".UI.TermList"
             android:exported="false"/>
         <activity
             android:name=".UI.CourseDetailsAssessmentList"
-            android:label="Course List"
+            android:label="Course Details and Assessments"
+            android:parentActivityName=".UI.TermDetailsCourseList"
             android:exported="false"/>
         <activity
             android:name=".UI.TermList"
