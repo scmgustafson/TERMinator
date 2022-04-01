@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onStartBtnClick(View view) {
+    public void onTermBtnClick(View view) {
         Intent intent = new Intent(MainActivity.this, TermList.class); //Create an intent to move from this activity to TermList activity
         startActivity(intent); //Pass intent into startActivity method
     }

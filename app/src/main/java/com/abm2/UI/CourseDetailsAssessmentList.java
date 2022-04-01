@@ -8,12 +8,12 @@ import android.view.MenuItem;
 
 import com.abm2.R;
 
-public class CourseList extends AppCompatActivity {
+public class CourseDetailsAssessmentList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_list);
+        setContentView(R.layout.activity_course_details_assessment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
     }
 

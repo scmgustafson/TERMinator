@@ -14,19 +14,11 @@
             android:label="Assessment Details"
             android:exported="false"/>
         <activity
-            android:name=".UI.CourseDetails"
-            android:label="Course Details"
-            android:exported="false"/>
-        <activity
-            android:name=".UI.TermDetails"
+            android:name=".UI.TermDetailsCourseList"
             android:label="Term Details"
             android:exported="false"/>
         <activity
-            android:name=".UI.AssessmentList"
-            android:label="Assessment List"
-            android:exported="false"/>
-        <activity
-            android:name=".UI.CourseList"
+            android:name=".UI.CourseDetailsAssessmentList"
             android:label="Course List"
             android:exported="false"/>
         <activity

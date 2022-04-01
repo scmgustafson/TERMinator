@@ -85,7 +85,4 @@ public class TermList extends AppCompatActivity {
                 }, year, date, month);
         datePickerDialog.show();
     }
-
-    public void onExpandImgClick(View view) {
-    }
 }

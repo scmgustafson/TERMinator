@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.abm2.R;
 
-public class CourseDetails extends AppCompatActivity {
+public class TermDetailsCourseList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_details);
+        setContentView(R.layout.activity_term_details_course_list);
     }
 }

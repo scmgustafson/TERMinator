@@ -29,7 +29,7 @@
         <EditText
             android:id="@+id/termTitleText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:ems="10"
             android:hint="Term Title"
             android:inputType="text"
@@ -43,7 +43,7 @@
             <EditText
                 android:id="@+id/startDateText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="7dp"
                 android:editable="false"
                 android:ems="10"
@@ -53,7 +53,7 @@
             <ImageView
                 android:id="@+id/startDateImg"
                 android:layout_width="51dp"
-                android:layout_height="46dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="8dp"
                 android:onClick="onStartDateImgClick"
                 app:srcCompat="@drawable/ic_baseline_add_24" />
@@ -68,7 +68,7 @@
             <EditText
                 android:id="@+id/endDateText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:editable="false"
                 android:ems="10"
@@ -78,7 +78,7 @@
             <ImageView
                 android:id="@+id/endDateImg"
                 android:layout_width="51dp"
-                android:layout_height="46dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="8dp"
                 android:onClick="onEndDateImgClick"
                 app:srcCompat="@drawable/ic_baseline_add_24" />
