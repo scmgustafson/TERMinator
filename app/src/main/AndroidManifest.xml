@@ -10,21 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2">
         <activity
-            android:name=".UI.AddAssessment"
-            android:label="Add New Assessment"
-            android:parentActivityName=".UI.AssessmentList"
-            android:exported="false" />
-        <activity
-            android:name=".UI.AddCourse"
-            android:label="Add New Course"
-            android:parentActivityName=".UI.CourseList"
-            android:exported="false" />
-        <activity
-            android:name=".UI.AddTerm"
-            android:label="Add New Term"
-            android:parentActivityName=".UI.TermList"
-            android:exported="false" />
-        <activity
             android:name=".UI.AssessmentDetails"
             android:label="Assessment Details"
             android:exported="false"/>
