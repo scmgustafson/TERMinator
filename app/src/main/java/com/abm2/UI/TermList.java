@@ -2,6 +2,7 @@ package com.abm2.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ public class TermList extends AppCompatActivity {
     }
 
     public void OnFloatingActionClick(View view) {
-
+        Intent intent = new Intent(TermList.this, AddTerm.class); //Create an intent to move from this activity to TermList activity
+        startActivity(intent); //Pass intent into startActivity method
     }
 }
