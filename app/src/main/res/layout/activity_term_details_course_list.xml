@@ -18,7 +18,7 @@
 
             <LinearLayout
                 android:id="@+id/linearTermDetails"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -26,14 +26,14 @@
                     android:id="@+id/textTermDetailsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Term Details for Term:"
+                    android:text="Term Details:"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:orientation="vertical">
 
