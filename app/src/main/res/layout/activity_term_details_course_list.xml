@@ -17,13 +17,13 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearCourseDetails"
+                android:id="@+id/linearAssessmentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textCourseDetailsTitle"
+                    android:id="@+id/textAssessmentDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Term Details:"
@@ -38,13 +38,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textCourseTopTitle"
+                        android:id="@+id/textAssessmentCourse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:text="TERM TITLE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -54,17 +54,17 @@
                         android:layout_marginVertical="5dp"
                         android:text="TERM START DATE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textCourseEndDate"
+                        android:id="@+id/textAssessmentEnd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:text="TERM END DATE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
                         app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
 
