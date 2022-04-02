@@ -17,13 +17,13 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearTermDetails"
+                android:id="@+id/linearCourseDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textTermDetailsTitle"
+                    android:id="@+id/textCourseDetailsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Term Details:"
@@ -38,46 +38,46 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textTermTopTitle"
+                        android:id="@+id/textCourseTopTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:text="TERM TITLE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textTermStartDate"
+                        android:id="@+id/textCourseStartDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:text="TERM START DATE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textTermEndDate"
+                        android:id="@+id/textCourseEndDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:text="TERM END DATE"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetailsTitle"
+                        app:layout_constraintStart_toEndOf="@+id/textCourseDetailsTitle"
                         app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearAddCourse"
+                android:id="@+id/linearAddAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textAddNewCourse"
+                    android:id="@+id/textAddNewAssessment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -85,7 +85,7 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/courseTitleText"
+                    android:id="@+id/editTextAssessmentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:ems="10"
@@ -124,7 +124,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/endDateText"
+                        android:id="@+id/editTextEndDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
@@ -195,14 +195,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearTermCourses"
+                android:id="@+id/linearCourseAssessments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textTermCourses"
+                    android:id="@+id/textCourseAssessments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Term Courses:"
@@ -215,7 +215,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textCourseTitle"
+                        android:id="@+id/textAssessmentTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"

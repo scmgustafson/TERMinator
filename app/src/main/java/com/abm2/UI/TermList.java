@@ -10,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.abm2.R;
 
-import java.time.ZoneOffset;
 import java.util.Calendar;
 
 public class TermList extends AppCompatActivity {
@@ -30,7 +28,7 @@ public class TermList extends AppCompatActivity {
         setContentView(R.layout.activity_term_list);
 
         startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.endDateText);
+        endDateText = findViewById(R.id.editTextEndDate);
 
     }
 

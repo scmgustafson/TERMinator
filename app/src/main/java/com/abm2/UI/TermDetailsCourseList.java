@@ -24,9 +24,10 @@ public class TermDetailsCourseList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details_course_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
 
         startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.endDateText);
+        endDateText = findViewById(R.id.editTextEndDate);
     }
 
     public void onStartDateImgClick(View view) {

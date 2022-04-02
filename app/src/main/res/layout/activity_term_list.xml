@@ -18,20 +18,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textAddNewCourse"
+            android:id="@+id/textAddNewAssessment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add New Term:"
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/linearAddCourse"
+            android:id="@+id/linearAddAssessment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/courseTitleText"
+                android:id="@+id/editTextAssessmentTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:ems="10"
@@ -70,7 +70,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/endDateText"
+                    android:id="@+id/editTextEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
@@ -98,7 +98,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textTermCourses"
+            android:id="@+id/textCourseAssessments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -117,7 +117,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textCourseTitle"
+                    android:id="@+id/textAssessmentTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="onTermTitleTextClick"
