@@ -41,8 +41,8 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        month += 1;
-                        endDateText.setText(month+"-"+date+"-"+year);
+                        endDateText.setText((month+1)+"-"+date+"-"+year);
+                        CAL.set(year, month, date);
                     }
                 }, year, month, date);
         datePickerDialog.show();

@@ -13,25 +13,32 @@ import android.widget.EditText;
 
 import com.abm2.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class TermList extends AppCompatActivity {
 
     private EditText startDateText;
     private EditText endDateText;
 
-    private int date, month, year;
-
+    //Prepare date fields
     final Calendar CAL = Calendar.getInstance();
+    private int date, month, year;
+    String dateFormat = "MM/dd/yy";
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+    Date startDate = new Date();
+    Date endDate = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
 
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,8 +64,8 @@ public class TermList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        month += 1;
-                        startDateText.setText(month+"-"+date+"-"+year);
+                        startDateText.setText((month+1)+"-"+date+"-"+year);
+                        CAL.set(year, month, date);
                     }
                 }, year, month, date);
         datePickerDialog.show();
@@ -73,8 +80,8 @@ public class TermList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        month += 1;
-                        endDateText.setText(month+"-"+date+"-"+year);
+                        endDateText.setText((month+1)+"-"+date+"-"+year);
+                        CAL.set(year, month, date);
                     }
                 }, year, month, date);
         datePickerDialog.show();
