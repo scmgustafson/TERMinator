@@ -6,8 +6,10 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.abm2.R;
 
@@ -17,10 +19,11 @@ public class TermDetailsCourseList extends AppCompatActivity {
 
     private EditText startDateText;
     private EditText endDateText;
+    private Spinner statusSpinner;
 
-    private int date, month, year;
-
+    //Initialize date fields
     final Calendar CAL = Calendar.getInstance();
+    private int date, month, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,13 @@ public class TermDetailsCourseList extends AppCompatActivity {
         setContentView(R.layout.activity_term_details_course_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
 
+        //Set spinner information and populate
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
+        statusSpinner = findViewById(R.id.statusSpinner);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        statusSpinner.setAdapter(statusAdapter);
+
+        //Set other layout items
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
     }
@@ -41,8 +51,8 @@ public class TermDetailsCourseList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        month += 1;
-                        startDateText.setText(month+"-"+date+"-"+year);
+                        startDateText.setText((month+1)+"-"+date+"-"+year);
+                        CAL.set(year, month, date);
                     }
                 }, year, month, date);
         datePickerDialog.show();
@@ -57,8 +67,8 @@ public class TermDetailsCourseList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        month += 1;
-                        endDateText.setText(month+"-"+date+"-"+year);
+                        endDateText.setText((month+1)+"-"+date+"-"+year);
+                        CAL.set(year, month, date);
                     }
                 }, year, month, date);
         datePickerDialog.show();

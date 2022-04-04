@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">TERMinator</string>
     <string name="welcome_msg">Managing your coursework made easy</string>
+    <string-array name="status_array">
+        <item>Not started</item>
+        <item>In Progress</item>
+        <item>Complete</item>
+        <item>Pending</item>
+    </string-array>
 </resources>
