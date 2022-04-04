@@ -22,6 +22,8 @@ public class TermList extends AppCompatActivity {
 
     private int date, month, year;
 
+    final Calendar CAL = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +49,9 @@ public class TermList extends AppCompatActivity {
     }
 
     public void onStartDateImgClick(View view) {
-        final Calendar cal = Calendar.getInstance();
-        date = cal.get(Calendar.DATE);
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
+        date = CAL.get(Calendar.DATE);
+        month = CAL.get(Calendar.MONTH);
+        year = CAL.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
@@ -59,15 +60,14 @@ public class TermList extends AppCompatActivity {
                         month += 1;
                         startDateText.setText(month+"-"+date+"-"+year);
                     }
-                }, year, date, month);
+                }, year, month, date);
         datePickerDialog.show();
     }
 
     public void onEndDateImgClick(View view) {
-        final Calendar cal = Calendar.getInstance();
-        date = cal.get(Calendar.DATE);
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
+        date = CAL.get(Calendar.DATE);
+        month = CAL.get(Calendar.MONTH);
+        year = CAL.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TermList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
@@ -76,7 +76,7 @@ public class TermList extends AppCompatActivity {
                         month += 1;
                         endDateText.setText(month+"-"+date+"-"+year);
                     }
-                }, year, date, month);
+                }, year, month, date);
         datePickerDialog.show();
     }
 
