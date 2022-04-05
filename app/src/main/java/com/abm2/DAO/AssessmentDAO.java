@@ -22,6 +22,6 @@ public interface AssessmentDAO {
     @Delete
     void delete(Assessment assessment);
 
-    @Query("SELECT * FROM courses")
+    @Query("SELECT * FROM assessments")
     List<Assessment> selectAllAssessments();
 }
