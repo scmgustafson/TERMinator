@@ -21,6 +21,16 @@ public class Term {
         this.endDate = endDate;
     }
 
+    @Override
+    public String toString() {
+        return "Term{" +
+                "termId=" + termId +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+
     private int getTermId() {
         return termId;
     }

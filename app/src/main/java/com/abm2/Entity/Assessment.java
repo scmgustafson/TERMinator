@@ -23,6 +23,17 @@ public class Assessment {
         this.courseId = courseId;
     }
 
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "assessmentId=" + assessmentId +
+                ", title='" + title + '\'' +
+                ", endDate=" + endDate +
+                ", type='" + type + '\'' +
+                ", courseId=" + courseId +
+                '}';
+    }
+
     public int getAssessmentId() {
         return assessmentId;
     }

@@ -3,6 +3,7 @@ package com.abm2.Entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,23 @@ public class Course {
         this.instructorEmail = instructorEmail;
         this.instructorPhone = instructorPhone;
         this.termId = termId;
+
+        notes = new ArrayList<String>();
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status='" + status + '\'' +
+                ", instructorName='" + instructorName + '\'' +
+                ", instructorEmail='" + instructorEmail + '\'' +
+                ", instructorPhone='" + instructorPhone + '\'' +
+                ", termId=" + termId +
+                '}';
     }
 
     public int getCourseId() {
