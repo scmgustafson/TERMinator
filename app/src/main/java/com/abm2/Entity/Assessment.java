@@ -38,6 +38,10 @@ public class Assessment {
         return assessmentId;
     }
 
+    public void setAssessmentId(int assessmentId) {
+        this.assessmentId = assessmentId;
+    }
+
     public String getTitle() {
         return title;
     }

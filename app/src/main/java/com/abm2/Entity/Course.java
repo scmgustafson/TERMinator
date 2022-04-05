@@ -20,10 +20,10 @@ public class Course {
     private String instructorName;
     private String instructorEmail;
     private String instructorPhone;
-    private List<String> notes;
+    private String notes;
     private int termId;
 
-    public Course(String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, int termId) {
+    public Course(String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, String notes, int termId) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -31,9 +31,8 @@ public class Course {
         this.instructorName = instructorName;
         this.instructorEmail = instructorEmail;
         this.instructorPhone = instructorPhone;
+        this.notes = notes;
         this.termId = termId;
-
-        notes = new ArrayList<String>();
     }
 
     @Override
@@ -53,6 +52,10 @@ public class Course {
 
     public int getCourseId() {
         return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getTitle() {
@@ -109,6 +112,14 @@ public class Course {
 
     public void setInstructorPhone(String instructorPhone) {
         this.instructorPhone = instructorPhone;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public int getTermId() {

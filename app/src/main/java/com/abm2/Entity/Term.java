@@ -31,8 +31,12 @@ public class Term {
                 '}';
     }
 
-    private int getTermId() {
+    public int getTermId() {
         return termId;
+    }
+
+    public void setTermId(int termId) {
+        this.termId = termId;
     }
 
     public String getTitle() {
