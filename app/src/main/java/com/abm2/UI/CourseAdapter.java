@@ -29,8 +29,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     //Get the current term that has been clicked using index of list (position)
                     int position = getAdapterPosition();
                     final Course currentCourse = allCourses.get(position);
-                    //TODO LEARN MORE ABOUT SENDING OBJECT DATA TO NEXT SCREEN WITH Intent.putExtra()
                     Intent intent = new Intent(context, CourseDetailsAssessmentList.class);
+                    intent.putExtra("term", String.valueOf(currentCourse.getTermId())); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
+                    intent.putExtra("title", currentCourse.getTitle());
+                    intent.putExtra("startDate", currentCourse.getStartDate().toString());
+                    intent.putExtra("endDate", currentCourse.getEndDate().toString());
+                    intent.putExtra("status", currentCourse.getStatus());
+                    intent.putExtra("instructorName", currentCourse.getInstructorName());
+                    intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());
+                    intent.putExtra("instructorPhone", currentCourse.getInstructorPhone());
+                    intent.putExtra("notes", currentCourse.getInstructorPhone()); //TODO IMPLEMENT LIST OF NOTES
                     context.startActivity(intent);
                 }
             });

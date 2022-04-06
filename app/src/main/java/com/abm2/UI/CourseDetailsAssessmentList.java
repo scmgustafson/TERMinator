@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
@@ -20,6 +21,26 @@ import java.util.Calendar;
 import java.util.List;
 
 public class CourseDetailsAssessmentList extends AppCompatActivity {
+    //Declare layout related fields
+    private String sentTerm;
+    private String sentTitle;
+    private String sentStart;
+    private String sentEnd;
+    private String sentStatus;
+    private String sentName;
+    private String sentEmail;
+    private String sentPhone;
+    private String sentNotes; //TODO IMPLEMENT LIST OF NOTES
+
+    private TextView courseTerm;
+    private TextView courseTitle;
+    private TextView courseStart;
+    private TextView courseEnd;
+    private TextView courseStatus;
+    private TextView courseName;
+    private TextView courseEmail;
+    private TextView coursePhone;
+    private TextView courseNotes; //TODO IMPLEMENT LIST OF NOTES
 
     private EditText startDateText;
     private EditText endDateText;
@@ -34,6 +55,41 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         setContentView(R.layout.activity_course_details_assessment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
 
+        startDateText = findViewById(R.id.startDateText);
+        endDateText = findViewById(R.id.editTextEndDate);
+
+        //Set Course detailed information
+        courseTerm = findViewById(R.id.textCourseTerm);
+        courseTitle = findViewById(R.id.textCourseTitle);
+        courseStart = findViewById(R.id.textCourseStart);
+        courseEnd = findViewById(R.id.textCourseEnd);
+        courseStatus = findViewById(R.id.textCourseStatus);
+        courseName = findViewById(R.id.textCourseInstructorName);
+        courseEmail = findViewById(R.id.textCourseInstructorEmail);
+        coursePhone = findViewById(R.id.textCourseInstructorPhone);
+        courseNotes = findViewById(R.id.textNote); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
+
+        sentTerm = getIntent().getStringExtra("term");
+        sentTitle = getIntent().getStringExtra("title");
+        sentStart = getIntent().getStringExtra("startDate");
+        sentEnd = getIntent().getStringExtra("endDate");
+        sentStatus = getIntent().getStringExtra("status");
+        sentName = getIntent().getStringExtra("instructorName");
+        sentPhone = getIntent().getStringExtra("instructorPhone");
+        sentEmail = getIntent().getStringExtra("instructorEmail");
+        sentNotes = getIntent().getStringExtra("notes"); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
+
+        courseTerm.setText(sentTerm);
+        courseTitle.setText(sentTitle);
+        courseStart.setText(sentStart);
+        courseEnd.setText(sentEnd);
+        courseStatus.setText(sentStatus);
+        courseName.setText(sentName);
+        coursePhone.setText(sentPhone);
+        courseEmail.setText(sentEmail);
+        courseNotes.setText(sentNotes);
+
+        //Set other layout items
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
 
