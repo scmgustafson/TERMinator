@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Course;
@@ -22,6 +23,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class TermDetailsCourseList extends AppCompatActivity {
+    //Declare layout related fields
+    private String sentTitle;
+    private String sentStart;
+    private String sentEnd;
+
+    private TextView termTitle;
+    private TextView termStart;
+    private TextView termEnd;
 
     private EditText startDateText;
     private EditText endDateText;
@@ -44,8 +53,20 @@ public class TermDetailsCourseList extends AppCompatActivity {
         statusSpinner.setAdapter(statusAdapter);
 
         //Set other layout items
+        termTitle = findViewById(R.id.textTermTitle);
+        termStart = findViewById(R.id.textTermStart);
+        termEnd = findViewById(R.id.textTermEnd);
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
+
+        //Populate term detailed information
+        sentTitle = getIntent().getStringExtra("title"); //Retrieved from the intent extra in previous activity
+        sentStart = getIntent().getStringExtra("startDate");
+        sentEnd = getIntent().getStringExtra("endDate");
+
+        termTitle.setText(sentTitle);
+        termStart.setText(sentStart);
+        termEnd.setText(sentEnd);
 
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvCourses);
