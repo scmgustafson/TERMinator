@@ -59,7 +59,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
 
-        //Populate term detailed information
+        //Populate current term detailed information using intent info from TermAdapter
         sentTitle = getIntent().getStringExtra("title"); //Retrieved from the intent extra in previous activity
         sentStart = getIntent().getStringExtra("startDate");
         sentEnd = getIntent().getStringExtra("endDate");
