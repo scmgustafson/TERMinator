@@ -97,6 +97,8 @@ public class TermList extends AppCompatActivity {
                         CAL.set(year, month, date);
                     }
                 }, year, month, date);
+        //TODO set minimum for end date to startdate
+//        datePickerDialog.getDatePicker().setMinDate(whatever start date is);
         datePickerDialog.show();
     }
 
