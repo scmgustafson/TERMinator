@@ -271,7 +271,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textCourseAssessments"
+                    android:id="@+id/textYourTerms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Course Assessments:"

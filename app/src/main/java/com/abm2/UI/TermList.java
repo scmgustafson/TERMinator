@@ -1,6 +1,8 @@
 package com.abm2.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -11,11 +13,14 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.abm2.Database.Repository;
+import com.abm2.Entity.Term;
 import com.abm2.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class TermList extends AppCompatActivity {
@@ -33,12 +38,20 @@ public class TermList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
 
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
+
+        //Populate recycler view with Term items from DB
+        RecyclerView recyclerView = findViewById(R.id.rvTerms);
+        Repository repo = new Repository(getApplication());
+        List<Term> allTerms = repo.selectAllTerms();
+        final TermAdapter adapter = new TermAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setTerms(allTerms);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

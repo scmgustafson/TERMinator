@@ -6,126 +6,117 @@
     android:layout_height="match_parent"
     tools:context=".UI.TermList">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textAddNewAssessment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add New Term:"
-            android:textSize="20sp" />
-
         <LinearLayout
-            android:id="@+id/linearAddAssessment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextAssessmentTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:hint="Term Title"
-                android:inputType="text"
-                android:textAlignment="center" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/startDateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="7dp"
-                    android:editable="false"
-                    android:ems="10"
-                    android:hint="Start Date"
-                    android:textAlignment="center" />
-
-                <ImageView
-                    android:id="@+id/startDateImg"
-                    android:layout_width="51dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="8dp"
-                    android:onClick="onStartDateImgClick"
-                    app:srcCompat="@drawable/ic_baseline_add_24" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextEndDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:editable="false"
-                    android:ems="10"
-                    android:hint="End Date"
-                    android:textAlignment="center" />
-
-                <ImageView
-                    android:id="@+id/endDateImg"
-                    android:layout_width="51dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="8dp"
-                    android:onClick="onEndDateImgClick"
-                    app:srcCompat="@drawable/ic_baseline_add_24" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/addBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add"
-                android:onClick="onAddBtnClick"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textCourseAssessments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Your Terms:"
-            android:textSize="20sp" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textAddNewAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
+                android:text="Add New Term:"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/linearAddAssessment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textAssessmentTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="onTermTitleTextClick"
-                    android:text="COURSE TITLE"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </ScrollView>
+                <EditText
+                    android:id="@+id/editTextAssessmentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:ems="10"
+                    android:hint="Term Title"
+                    android:inputType="text"
+                    android:textAlignment="center" />
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/startDateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="7dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="Start Date"
+                        android:textAlignment="center" />
+
+                    <ImageView
+                        android:id="@+id/startDateImg"
+                        android:layout_width="51dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="8dp"
+                        android:onClick="onStartDateImgClick"
+                        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="End Date"
+                        android:textAlignment="center" />
+
+                    <ImageView
+                        android:id="@+id/endDateImg"
+                        android:layout_width="51dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="8dp"
+                        android:onClick="onEndDateImgClick"
+                        app:srcCompat="@drawable/ic_baseline_add_24" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/addBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onAddBtnClick"
+                    android:text="Add" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textYourTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Your Terms:"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTerms"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#91FFE6"
+                android:visibility="visible" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
