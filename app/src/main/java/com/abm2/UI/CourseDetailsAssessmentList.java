@@ -22,6 +22,7 @@ import java.util.List;
 
 public class CourseDetailsAssessmentList extends AppCompatActivity {
     //Declare layout related fields
+    //Variables for holding passed intent data
     private String sentTerm;
     private String sentTitle;
     private String sentStart;
@@ -31,7 +32,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private String sentEmail;
     private String sentPhone;
     private String sentNotes; //TODO IMPLEMENT LIST OF NOTES
-
+    //Fields targeting TextView layout objects
     private TextView courseTerm;
     private TextView courseTitle;
     private TextView courseStart;

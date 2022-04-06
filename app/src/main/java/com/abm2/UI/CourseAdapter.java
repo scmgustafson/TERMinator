@@ -38,7 +38,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("instructorName", currentCourse.getInstructorName());
                     intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());
                     intent.putExtra("instructorPhone", currentCourse.getInstructorPhone());
-                    intent.putExtra("notes", currentCourse.getInstructorPhone()); //TODO IMPLEMENT LIST OF NOTES
+                    intent.putExtra("notes", currentCourse.getNotes()); //TODO IMPLEMENT LIST OF NOTES
                     context.startActivity(intent);
                 }
             });
