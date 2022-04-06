@@ -51,7 +51,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the list item
-        View itemView = inflater.inflate(R.layout.term_list_item, parent, false);
+        View itemView = inflater.inflate(R.layout.assessment_list_item, parent, false);
         return new CourseViewHolder(itemView);
     }
 
