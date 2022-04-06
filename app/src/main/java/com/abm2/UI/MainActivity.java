@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.abm2.Database.Repository;
+import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
 import com.abm2.R;
@@ -27,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup DB with Sample Data
 //        Repository repo = new Repository(getApplication());
-//        Term term = new Term("Test Term", new Date(), new Date());
+//        Term term = new Term("Summer Term", new Date(), new Date());
+//        Course course = new Course("Physics", new Date(), new Date(), "In Progress", "Teacher", "Email", "1112223333", "Notes", 1);
+//        Assessment assessment = new Assessment("Physics Final", new Date(), "Objective", 1);
 //        repo.insert(term);
-//        Course course = new Course("Other Test Course", new Date(), new Date(), "Completed", "Name", "email", "1234567890", "note", 1);
 //        repo.insert(course);
+//        repo.insert(assessment);
     }
 }
