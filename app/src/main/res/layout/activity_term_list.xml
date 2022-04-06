@@ -7,9 +7,9 @@
     tools:context=".UI.TermList">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -113,7 +113,7 @@
                 android:id="@+id/rvTerms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#91FFE6"
+                android:background="#BDBDBD"
                 android:visibility="visible" />
 
         </LinearLayout>

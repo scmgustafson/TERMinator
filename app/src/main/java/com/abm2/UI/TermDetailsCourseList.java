@@ -1,6 +1,8 @@
 package com.abm2.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -11,9 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.abm2.Database.Repository;
+import com.abm2.Entity.Course;
+import com.abm2.Entity.Term;
 import com.abm2.R;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class TermDetailsCourseList extends AppCompatActivity {
 
@@ -40,6 +46,15 @@ public class TermDetailsCourseList extends AppCompatActivity {
         //Set other layout items
         startDateText = findViewById(R.id.startDateText);
         endDateText = findViewById(R.id.editTextEndDate);
+
+        //Populate recycler view with Term items from DB
+        RecyclerView recyclerView = findViewById(R.id.rvCourses);
+        Repository repo = new Repository(getApplication());
+        List<Course> allCourses = repo.selectAllCourses();
+        final CourseAdapter adapter = new CourseAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setCourses(allCourses);
     }
 
     public void onStartDateImgClick(View view) {
