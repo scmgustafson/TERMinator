@@ -3,6 +3,7 @@ package com.abm2.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
+import com.abm2.Entity.Course;
 import com.abm2.R;
 
 import java.util.Calendar;
@@ -128,5 +130,27 @@ public class AssessmentDetails extends AppCompatActivity {
                 toast.show();
             }
         }
+    }
+
+    public void onBtnDeleteAssessmentClick(View view) {
+        repo = new Repository(getApplication());
+        repo.delete(sentAssessment);
+
+        Toast toast = Toast.makeText(getApplication(), "Deleting assessment...", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+
+        Intent intent = new Intent(AssessmentDetails.this, CourseDetailsAssessmentList.class);
+        Course currentCourse = repo.selectCourseById(sentAssessment.getCourseId()).get(0);
+        intent.putExtra("term", String.valueOf(currentCourse.getTermId())); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
+        intent.putExtra("title", currentCourse.getTitle());
+        intent.putExtra("startDate", currentCourse.getStartDate().toString());
+        intent.putExtra("endDate", currentCourse.getEndDate().toString());
+        intent.putExtra("status", currentCourse.getStatus());
+        intent.putExtra("instructorName", currentCourse.getInstructorName());
+        intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());
+        intent.putExtra("instructorPhone", currentCourse.getInstructorPhone());
+        intent.putExtra("notes", currentCourse.getNotes()); //TODO IMPLEMENT LIST OF NOTES
+        startActivity(intent);
     }
 }

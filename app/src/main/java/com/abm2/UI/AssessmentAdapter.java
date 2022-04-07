@@ -30,7 +30,6 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     //Get the current term that has been clicked using index of list (position)
                     int position = getAdapterPosition();
                     final Assessment currentAssessment = allAssessments.get(position);
-                    //TODO LEARN MORE ABOUT SENDING OBJECT DATA TO NEXT SCREEN WITH Intent.putExtra()
                     Intent intent = new Intent(context, AssessmentDetails.class);
                     intent.putExtra("id", currentAssessment.getAssessmentId());
                     intent.putExtra("title", currentAssessment.getTitle());

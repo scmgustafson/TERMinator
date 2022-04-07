@@ -134,6 +134,19 @@ public class Repository {
         return allCourses;
     }
 
+    public List<Course> selectCourseById(int courseId) {
+        databaseExecutor.execute(()->{
+            allCourses = courseDAO.selectCourseById(courseId);
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return allCourses;
+    }
+
     //Define CRUD methods for Assessment entity
     public void insert(Assessment assessment) {
         databaseExecutor.execute(()->{
