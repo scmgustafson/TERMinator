@@ -111,6 +111,19 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         adapter.setAssessments(allAssessments);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Populate recycler view with Term items from DB
+        RecyclerView recyclerView = findViewById(R.id.rvAssessments);
+        Repository repo = new Repository(getApplication());
+        List<Assessment> allAssessments = repo.selectAssessmentsByCourse(sentId);
+        final AssessmentAdapter adapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setAssessments(allAssessments);
+    }
+
     public void onEndDateImgClick(View view) {
         date = CAL.get(Calendar.DATE);
         month = CAL.get(Calendar.MONTH);
