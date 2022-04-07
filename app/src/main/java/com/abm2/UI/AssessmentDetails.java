@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abm2.Database.DateConverter;
+import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
 import com.abm2.R;
 
@@ -34,6 +37,8 @@ public class AssessmentDetails extends AppCompatActivity {
     //Set Date related information
     private Date endDate;
     final Calendar CAL = Calendar.getInstance();
+    //DB related fields
+    Repository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,7 @@ public class AssessmentDetails extends AppCompatActivity {
         textTitle.setText(sentTitle);
         textEnd.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
         textCourse.setText(sentCourse);
-        if (sentType.equals("Objective")) {
+        if (sentType.toLowerCase().equals("objective")) {
             rbObjective.setChecked(true);
         }
         else {
@@ -80,8 +85,45 @@ public class AssessmentDetails extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         textEnd.setText((month+1)+"-"+date+"-"+year);
                         CAL.set(year, month, date);
+                        endDate.setTime(CAL.get(Calendar.LONG));
                     }
                 }, year, month, date);
         datePickerDialog.show();
+    }
+
+    public void onBtnSaveAssessmentDetailsClick(View view) {
+        repo = new Repository(getApplication());
+        if (sentAssessment.getAssessmentId() > 0) {
+            String newTitle = null;
+            try {
+                newTitle = String.valueOf(textTitle.getText());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            //Check for blank fields
+            if (newTitle.equals("") || newTitle.equals(null)) {
+                Toast toast = Toast.makeText(getApplication(), "Title field must not be blank", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+
+            }
+            else {
+                String newType = null;
+                if (rbObjective.isChecked()) {
+                    newType = "Objective";
+                }
+                else if (rbPerformance.isChecked()){
+                    newType = "Performance";
+                }
+
+                Assessment newAssessment = new Assessment(sentAssessment.getAssessmentId(), newTitle, endDate, newType, sentAssessment.getCourseId());
+                repo.update(newAssessment);
+
+                Toast toast = Toast.makeText(getApplication(), "Assessment saved", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        }
     }
 }
