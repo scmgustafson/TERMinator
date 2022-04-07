@@ -28,6 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="Assessment Details:"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,47 +38,116 @@
                     android:layout_marginLeft="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textAssessmentCourse"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="COURSE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textAssessmentTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="TITLE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:text="Course:"
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/textAssessmentEnd"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="ASSESSMENT END"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <EditText
+                            android:id="@+id/textAssessmentCourse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:ems="10"
+                            android:hint="Course Name"
+                            android:inputType="none"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/textAssessmentType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="ASSESSMENT TYPE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:text="Title:"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/textAssessmentTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Assessment Title"
+                            android:inputType="textShortMessage"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:text="Date:"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/textAssessmentEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Assessment Date"
+                            android:inputType="textShortMessage"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:onClick="onTextAssessmentEndClick"/>
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/rgDetailsAssessmentType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbDetailsObjective"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10sp"
+                            android:text="Objective" />
+
+                        <RadioButton
+                            android:id="@+id/rbDetailsPerformance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Performance" />
+                    </RadioGroup>
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSaveAssessmentDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
 
             </LinearLayout>
 

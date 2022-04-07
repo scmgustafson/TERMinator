@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abm2.Database.DateConverter;
 import com.abm2.Entity.Assessment;
 import com.abm2.R;
 
@@ -32,7 +33,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     //TODO LEARN MORE ABOUT SENDING OBJECT DATA TO NEXT SCREEN WITH Intent.putExtra()
                     Intent intent = new Intent(context, AssessmentDetails.class);
                     intent.putExtra("title", currentAssessment.getTitle());
-                    intent.putExtra("endDate", currentAssessment.getEndDate().toString());
+                    intent.putExtra("endDate", DateConverter.toTimestamp(currentAssessment.getEndDate()));
                     intent.putExtra("type", currentAssessment.getType());
                     intent.putExtra("course", String.valueOf(currentAssessment.getCourseId()));
                     context.startActivity(intent);
