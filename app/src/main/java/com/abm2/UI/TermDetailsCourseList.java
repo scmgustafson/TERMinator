@@ -14,19 +14,23 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
 import com.abm2.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TermDetailsCourseList extends AppCompatActivity {
     //Declare layout related fields
+    private Term sentTerm;
+    private int sentId;
     private String sentTitle;
-    private String sentStart;
-    private String sentEnd;
+    private Date sentStartDate;
+    private Date sentEndDate;
 
     private TextView termTitle;
     private TextView termStart;
@@ -60,18 +64,20 @@ public class TermDetailsCourseList extends AppCompatActivity {
         endDateText = findViewById(R.id.editTextEndDate);
 
         //Populate current term detailed information using intent info from TermAdapter
+        sentId = getIntent().getIntExtra("id", -1);
         sentTitle = getIntent().getStringExtra("title"); //Retrieved from the intent extra in previous activity
-        sentStart = getIntent().getStringExtra("startDate");
-        sentEnd = getIntent().getStringExtra("endDate");
+        sentStartDate = DateConverter.toDate(getIntent().getLongExtra("startDateLong", -1));
+        sentEndDate = DateConverter.toDate(getIntent().getLongExtra("endDateLong", -1));
+
+        sentTerm = new Term(sentId, sentTitle, sentStartDate, sentEndDate);
 
         termTitle.setText(sentTitle);
-        termStart.setText(sentStart);
-        termEnd.setText(sentEnd);
-
+        termStart.setText(sentStartDate.toString());
+        termEnd.setText(sentEndDate.toString());
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvCourses);
         Repository repo = new Repository(getApplication());
-        List<Course> allCourses = repo.selectAllCourses();
+        List<Course> allCourses = repo.selectCourseByTerm(sentId);
         final CourseAdapter adapter = new CourseAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

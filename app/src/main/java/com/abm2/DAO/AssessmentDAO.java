@@ -24,4 +24,7 @@ public interface AssessmentDAO {
 
     @Query("SELECT * FROM assessments")
     List<Assessment> selectAllAssessments();
+
+    @Query("SELECT * FROM assessments WHERE courseId = :courseId")
+    List<Assessment> selectAssessmentsByCourse(int courseId);
 }

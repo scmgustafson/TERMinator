@@ -27,4 +27,7 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM courses WHERE courseId = :courseId")
     List<Course> selectCourseById(int courseId);
+
+    @Query("SELECT * FROM courses WHERE termId = :termId")
+    List<Course> selectCoursesByTerm(int termId);
 }

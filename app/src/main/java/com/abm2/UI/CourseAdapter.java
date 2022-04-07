@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abm2.Database.DateConverter;
 import com.abm2.Entity.Course;
 import com.abm2.R;
 
@@ -30,10 +31,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     int position = getAdapterPosition();
                     final Course currentCourse = allCourses.get(position);
                     Intent intent = new Intent(context, CourseDetailsAssessmentList.class);
-                    intent.putExtra("term", String.valueOf(currentCourse.getTermId())); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
+                    intent.putExtra("id", currentCourse.getCourseId());
+                    intent.putExtra("term", currentCourse.getTermId()); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
                     intent.putExtra("title", currentCourse.getTitle());
-                    intent.putExtra("startDate", currentCourse.getStartDate().toString());
-                    intent.putExtra("endDate", currentCourse.getEndDate().toString());
+                    intent.putExtra("startDateLong", DateConverter.toTimestamp(currentCourse.getStartDate()));
+                    intent.putExtra("endDateLong", DateConverter.toTimestamp(currentCourse.getEndDate()));
                     intent.putExtra("status", currentCourse.getStatus());
                     intent.putExtra("instructorName", currentCourse.getInstructorName());
                     intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());

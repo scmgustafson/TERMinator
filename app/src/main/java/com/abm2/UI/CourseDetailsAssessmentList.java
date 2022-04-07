@@ -12,21 +12,25 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
 import com.abm2.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CourseDetailsAssessmentList extends AppCompatActivity {
     //Declare layout related fields
     //Variables for holding passed intent data
-    private String sentTerm;
+    private Course sentCourse;
+    private int sentId;
+    private int sentTerm;
     private String sentTitle;
-    private String sentStart;
-    private String sentEnd;
+    private Date sentStart;
+    private Date sentEnd;
     private String sentStatus;
     private String sentName;
     private String sentEmail;
@@ -70,20 +74,23 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         coursePhone = findViewById(R.id.textCourseInstructorPhone);
         courseNotes = findViewById(R.id.textNote); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
-        sentTerm = getIntent().getStringExtra("term");
+        sentId = getIntent().getIntExtra("id", -1);
+        sentTerm = getIntent().getIntExtra("term", -1);
         sentTitle = getIntent().getStringExtra("title");
-        sentStart = getIntent().getStringExtra("startDate");
-        sentEnd = getIntent().getStringExtra("endDate");
+        sentStart = DateConverter.toDate(getIntent().getLongExtra("startDateLong", -1));
+        sentEnd = DateConverter.toDate(getIntent().getLongExtra("endDateLong", -1));
         sentStatus = getIntent().getStringExtra("status");
         sentName = getIntent().getStringExtra("instructorName");
         sentPhone = getIntent().getStringExtra("instructorPhone");
         sentEmail = getIntent().getStringExtra("instructorEmail");
         sentNotes = getIntent().getStringExtra("notes"); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
-        courseTerm.setText(sentTerm);
+        sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentNotes, sentTerm);
+
+        courseTerm.setText(String.valueOf(sentTerm));
         courseTitle.setText(sentTitle);
-        courseStart.setText(sentStart);
-        courseEnd.setText(sentEnd);
+        courseStart.setText(sentStart.toString());
+        courseEnd.setText(sentEnd.toString());
         courseStatus.setText(sentStatus);
         courseName.setText(sentName);
         coursePhone.setText(sentPhone);
@@ -97,7 +104,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvAssessments);
         Repository repo = new Repository(getApplication());
-        List<Assessment> allAssessments = repo.selectAllAssessments();
+        List<Assessment> allAssessments = repo.selectAssessmentsByCourse(sentId);
         final AssessmentAdapter adapter = new AssessmentAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

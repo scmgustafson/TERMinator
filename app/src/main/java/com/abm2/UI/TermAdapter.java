@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abm2.Database.DateConverter;
 import com.abm2.Entity.Term;
 import com.abm2.R;
 
@@ -32,9 +33,10 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     final Term currentTerm = allTerms.get(position);
                     //TODO LEARN MORE ABOUT SENDING OBJECT DATA TO NEXT SCREEN WITH Intent.putExtra()
                     Intent intent = new Intent(context, TermDetailsCourseList.class);
+                    intent.putExtra("id", currentTerm.getTermId());
                     intent.putExtra("title", currentTerm.getTitle());
-                    intent.putExtra("startDate", currentTerm.getStartDate().toString());
-                    intent.putExtra("endDate", currentTerm.getEndDate().toString());
+                    intent.putExtra("startDateLong", DateConverter.toTimestamp(currentTerm.getStartDate()));
+                    intent.putExtra("endDateLong", DateConverter.toTimestamp(currentTerm.getEndDate()));
                     context.startActivity(intent);
                 }
             });

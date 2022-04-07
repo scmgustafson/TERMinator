@@ -145,7 +145,7 @@ public class AssessmentDetails extends AppCompatActivity {
         //Pass the assessment's course information to the previous screen to populate detailed fields
         Intent intent = new Intent(AssessmentDetails.this, CourseDetailsAssessmentList.class);
         Course currentCourse = repo.selectCourseById(sentAssessment.getCourseId()).get(0);
-        intent.putExtra("term", String.valueOf(currentCourse.getTermId())); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
+        intent.putExtra("term", String.valueOf(currentCourse.getTermId()));
         intent.putExtra("title", currentCourse.getTitle());
         intent.putExtra("startDate", currentCourse.getStartDate().toString());
         intent.putExtra("endDate", currentCourse.getEndDate().toString());
