@@ -136,10 +136,13 @@ public class AssessmentDetails extends AppCompatActivity {
         repo = new Repository(getApplication());
         repo.delete(sentAssessment);
 
+        //Display toast with confirmation message
         Toast toast = Toast.makeText(getApplication(), "Deleting assessment...", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
 
+
+        //Pass the assessment's course information to the previous screen to populate detailed fields
         Intent intent = new Intent(AssessmentDetails.this, CourseDetailsAssessmentList.class);
         Course currentCourse = repo.selectCourseById(sentAssessment.getCourseId()).get(0);
         intent.putExtra("term", String.valueOf(currentCourse.getTermId())); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
