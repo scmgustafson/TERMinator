@@ -22,17 +22,17 @@
         android:id="@+id/welcome_icon"
         android:layout_width="102dp"
         android:layout_height="108dp"
-        app:layout_constraintBottom_toTopOf="@id/termBtn"
+        app:layout_constraintBottom_toTopOf="@id/btnStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome_msg"
         app:srcCompat="@drawable/ic_launcher_fg" />
 
     <Button
-        android:id="@+id/termBtn"
+        android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onTermBtnClick"
+        android:onClick="onBtnStartClick"
         android:text="Start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

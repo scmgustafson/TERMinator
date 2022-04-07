@@ -135,4 +135,15 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         Intent intent = new Intent(CourseDetailsAssessmentList.this, AssessmentDetails.class);
         startActivity(intent);
     }
+
+    public void onImgAssessmentRefreshClick(View view) {
+        //Populate recycler view with Term items from DB
+        RecyclerView recyclerView = findViewById(R.id.rvAssessments);
+        Repository repo = new Repository(getApplication());
+        List<Assessment> allAssessments = repo.selectAssessmentsByCourse(sentId);
+        final AssessmentAdapter adapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setAssessments(allAssessments);
+    }
 }

@@ -125,9 +125,12 @@ public class AssessmentDetails extends AppCompatActivity {
                 repo.update(newAssessment);
 
                 //Set Toast error message then show to user
-                Toast toast = Toast.makeText(getApplication(), "Assessment saved", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplication(), "Assessment saved!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
+
+                //Move to previous screen
+                this.finish();
             }
         }
     }
@@ -141,19 +144,7 @@ public class AssessmentDetails extends AppCompatActivity {
         toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
 
-
-        //Pass the assessment's course information to the previous screen to populate detailed fields
-        Intent intent = new Intent(AssessmentDetails.this, CourseDetailsAssessmentList.class);
-        Course currentCourse = repo.selectCourseById(sentAssessment.getCourseId()).get(0);
-        intent.putExtra("term", String.valueOf(currentCourse.getTermId()));
-        intent.putExtra("title", currentCourse.getTitle());
-        intent.putExtra("startDate", currentCourse.getStartDate().toString());
-        intent.putExtra("endDate", currentCourse.getEndDate().toString());
-        intent.putExtra("status", currentCourse.getStatus());
-        intent.putExtra("instructorName", currentCourse.getInstructorName());
-        intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());
-        intent.putExtra("instructorPhone", currentCourse.getInstructorPhone());
-        intent.putExtra("notes", currentCourse.getNotes()); //TODO IMPLEMENT LIST OF NOTES
-        startActivity(intent);
+        //Move to previous screen
+        this.finish();
     }
 }

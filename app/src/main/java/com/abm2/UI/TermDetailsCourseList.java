@@ -83,6 +83,16 @@ public class TermDetailsCourseList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setCourses(allCourses);
     }
+//
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        // Save the user's current game state
+//        savedInstanceState.putInt();
+//        savedInstanceState.putInt(STATE_LEVEL, currentLevel);
+//
+//        // Always call the superclass so it can save the view hierarchy state
+//        super.onSaveInstanceState(savedInstanceState);
+//    }
 
     public void onStartDateImgClick(View view) {
         date = CAL.get(Calendar.DATE);
