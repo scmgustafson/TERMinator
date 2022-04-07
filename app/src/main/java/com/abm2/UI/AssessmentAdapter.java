@@ -32,6 +32,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     final Assessment currentAssessment = allAssessments.get(position);
                     //TODO LEARN MORE ABOUT SENDING OBJECT DATA TO NEXT SCREEN WITH Intent.putExtra()
                     Intent intent = new Intent(context, AssessmentDetails.class);
+                    intent.putExtra("id", currentAssessment.getAssessmentId());
                     intent.putExtra("title", currentAssessment.getTitle());
                     intent.putExtra("endDate", DateConverter.toTimestamp(currentAssessment.getEndDate()));
                     intent.putExtra("type", currentAssessment.getType());

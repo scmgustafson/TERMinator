@@ -18,7 +18,7 @@ import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
 
-@Database(entities={Term.class, Course.class, Assessment.class}, version=2, exportSchema = false)
+@Database(entities={Term.class, Course.class, Assessment.class}, version=4, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class TermDatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();

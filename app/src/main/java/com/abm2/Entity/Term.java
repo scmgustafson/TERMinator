@@ -15,7 +15,8 @@ public class Term {
     private Date startDate;
     private Date endDate;
 
-    public Term(String title, Date startDate, Date endDate) {
+    public Term(int termId, String title, Date startDate, Date endDate) {
+        this.termId = termId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;

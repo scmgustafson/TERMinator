@@ -23,7 +23,8 @@ public class Course {
     private String notes;
     private int termId;
 
-    public Course(String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, String notes, int termId) {
+    public Course(int courseId, String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, String notes, int termId) {
+        this.courseId = courseId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;

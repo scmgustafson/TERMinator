@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.abm2.Database.DateConverter;
+import com.abm2.Entity.Assessment;
 import com.abm2.R;
 
 import java.util.Calendar;
@@ -18,9 +19,10 @@ import java.util.Date;
 public class AssessmentDetails extends AppCompatActivity {
     //Declare layout related fields
     //Variables for holding passed intent data
+    private Assessment sentAssessment;
+    private int sentId;
     private String sentTitle;
     private Long sentEndLong;
-    private Date sentEndDate;
     private String sentType;
     private String sentCourse;
     //Fields for targetting TextView UI objects
@@ -30,6 +32,7 @@ public class AssessmentDetails extends AppCompatActivity {
     private RadioButton rbObjective;
     private RadioButton rbPerformance;
     //Set Date related information
+    private Date endDate;
     final Calendar CAL = Calendar.getInstance();
 
     @Override
@@ -43,13 +46,17 @@ public class AssessmentDetails extends AppCompatActivity {
         rbObjective = findViewById(R.id.rbDetailsObjective);
         rbPerformance = findViewById(R.id.rbDetailsPerformance);
 
+        sentId = getIntent().getIntExtra("id", -1);
         sentTitle = getIntent().getStringExtra("title");
         sentEndLong = getIntent().getLongExtra("endDate", -1);
-        sentEndDate = DateConverter.toDate(sentEndLong);
+        endDate = DateConverter.toDate(sentEndLong);
         sentType = getIntent().getStringExtra("type");
         sentCourse = getIntent().getStringExtra("course");
 
-        CAL.setTime(sentEndDate);
+        //Create Assessment object out of sent data
+        sentAssessment = new Assessment(sentId, sentTitle, endDate, sentType, Integer.valueOf(sentCourse));
+
+        CAL.setTime(endDate);
 
         textTitle.setText(sentTitle);
         textEnd.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
