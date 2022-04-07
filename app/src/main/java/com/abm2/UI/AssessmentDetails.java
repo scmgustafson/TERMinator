@@ -3,6 +3,7 @@ package com.abm2.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -85,7 +86,7 @@ public class AssessmentDetails extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         textEnd.setText((month+1)+"-"+date+"-"+year);
                         CAL.set(year, month, date);
-                        endDate.setTime(CAL.get(Calendar.LONG));
+                        endDate.setTime(CAL.getTimeInMillis());
                     }
                 }, year, month, date);
         datePickerDialog.show();
@@ -103,6 +104,7 @@ public class AssessmentDetails extends AppCompatActivity {
             }
             //Check for blank fields
             if (newTitle.equals("") || newTitle.equals(null)) {
+                //Set Toast error message then show to user
                 Toast toast = Toast.makeText(getApplication(), "Title field must not be blank", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
@@ -120,6 +122,7 @@ public class AssessmentDetails extends AppCompatActivity {
                 Assessment newAssessment = new Assessment(sentAssessment.getAssessmentId(), newTitle, endDate, newType, sentAssessment.getCourseId());
                 repo.update(newAssessment);
 
+                //Set Toast error message then show to user
                 Toast toast = Toast.makeText(getApplication(), "Assessment saved", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
