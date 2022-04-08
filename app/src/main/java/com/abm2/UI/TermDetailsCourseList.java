@@ -61,7 +61,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
         termStart = findViewById(R.id.textTermStart);
         termEnd = findViewById(R.id.textTermEnd);
         startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.editTextEndDate);
+        endDateText = findViewById(R.id.editNewAssessmentEndDate);
 
         //Populate current term detailed information using intent info from TermAdapter
         sentId = getIntent().getIntExtra("id", -1);
@@ -126,7 +126,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void onAddBtnClick(View view) {
+    public void onBtnAddNewCourseClick(View view) {
 
     }
 

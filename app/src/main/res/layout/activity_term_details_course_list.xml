@@ -85,7 +85,7 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/editTextAssessmentTitle"
+                    android:id="@+id/editNewAssessmentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:ems="10"
@@ -124,7 +124,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editTextEndDate"
+                        android:id="@+id/editNewAssessmentEndDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
@@ -181,10 +181,10 @@
                     android:textAlignment="center" />
 
                 <Button
-                    android:id="@+id/addBtn"
+                    android:id="@+id/btnAddAssessment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onAddBtnClick"
+                    android:onClick="onBtnAddNewCourseClick"
                     android:text="Add" />
 
             </LinearLayout>

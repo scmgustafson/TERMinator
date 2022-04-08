@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
@@ -46,22 +49,24 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private TextView courseEmail;
     private TextView coursePhone;
     private TextView courseNotes; //TODO IMPLEMENT LIST OF NOTES
-
-    private EditText startDateText;
-    private EditText endDateText;
-
+    //Set date related fields
     private int date, month, year;
-
     final Calendar CAL = Calendar.getInstance();
+    //Set DB related fields
+    Repository repo;
+    //Set fields for new assessment
+    private EditText editNewAssessmentTitle;
+    private EditText editNewAssessmentEndDate;
+    private RadioButton rbNewObjective;
+    private RadioButton rbNewPerformance;
+    private Date newAssessmentEndDate = new Date();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details_assessment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
-
-        startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.editTextEndDate);
 
         //Set Course detailed information
         courseTerm = findViewById(R.id.textCourseTerm);
@@ -97,9 +102,11 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseEmail.setText(sentEmail);
         courseNotes.setText(sentNotes);
 
-        //Set other layout items
-        startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.editTextEndDate);
+        //Set new assessment layout items
+        editNewAssessmentTitle = findViewById(R.id.editNewAssessmentTitle);
+        editNewAssessmentEndDate = findViewById(R.id.editNewAssessmentEndDate);
+        rbNewObjective = findViewById(R.id.rbNewObjective);
+        rbNewPerformance = findViewById(R.id.rbNewPerformance);
 
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvAssessments);
@@ -117,7 +124,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         refreshRecyclerView();
     }
 
-    public void onEndDateImgClick(View view) {
+    public void onEditEndDateClick(View view) {
         date = CAL.get(Calendar.DATE);
         month = CAL.get(Calendar.MONTH);
         year = CAL.get(Calendar.YEAR);
@@ -126,14 +133,52 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        endDateText.setText((month+1)+"-"+date+"-"+year);
+                        editNewAssessmentEndDate.setText((month+1)+"-"+date+"-"+year);
                         CAL.set(year, month, date);
+                        newAssessmentEndDate.setTime(CAL.getTimeInMillis());
                     }
                 }, year, month, date);
         datePickerDialog.show();
     }
 
-    public void onAddBtnClick(View view) {
+    public void onBtnAddNewAssessmentClick(View view) {
+        repo = new Repository(getApplication());
+        String newTitle = null;
+        String newType = null;
+        int newCourseId = sentCourse.getCourseId();
+        try {
+            newTitle = String.valueOf(editNewAssessmentTitle.getText());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Check for blank fields
+        if (newTitle.equals("") || newTitle.equals(null)) {
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "New assessment title field must not be blank", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+        }
+        else {
+            if (rbNewObjective.isChecked()) {
+                newType = "Objective";
+            }
+            else if (rbNewPerformance.isChecked()){
+                newType = "Performance";
+            }
+            //Get new ID for assessment
+            List<Assessment> allAssessments = repo.selectAllAssessments();
+            int newId = (allAssessments.get(allAssessments.size()-1).getAssessmentId()) + 1;
+            Assessment newAssessment = new Assessment(newId, newTitle, newAssessmentEndDate, newType, sentCourse.getCourseId());
+            repo.insert(newAssessment);
+
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "Assessment saved!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+
         refreshRecyclerView();
     }
 
