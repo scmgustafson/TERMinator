@@ -24,10 +24,12 @@
 
                 <TextView
                     android:id="@+id/textTermDetails"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Term Details:"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,7 +173,8 @@
                     android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="Add New Course:"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <androidx.gridlayout.widget.GridLayout
                     android:layout_width="match_parent"
@@ -362,10 +365,12 @@
 
                 <TextView
                     android:id="@+id/textYourTerms"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Term Courses:"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCourses"

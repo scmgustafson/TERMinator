@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Add New Term:"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.gridlayout.widget.GridLayout
                 android:layout_width="match_parent"
@@ -104,7 +105,8 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Your Terms:"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTerms"
