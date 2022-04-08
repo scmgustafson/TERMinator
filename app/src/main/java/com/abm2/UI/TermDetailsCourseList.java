@@ -26,13 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TermDetailsCourseList extends AppCompatActivity {
-    //Declare fields for term data including layout
-    private Term sentTerm;
-    private int sentId;
-    private String sentTitle;
-    private Date sentStartDate;
-    private Date sentEndDate;
-
+    //Declare fields for edit term details layout
     private String newTermTitle = null;
     private Date newTermStartDate = new Date();
     private Date newTermEndDate = new Date();
@@ -41,10 +35,32 @@ public class TermDetailsCourseList extends AppCompatActivity {
     private EditText editTermStartDate;
     private EditText editTermEndDate;
 
-    //Declare fields for new course including layout
+    //Declare fields for term object creation
+    private Term sentTerm;
+    private int sentId;
+    private String sentTitle;
+    private Date sentStartDate;
+    private Date sentEndDate;
+
+    //Declare fields for new course layout\
+    private EditText editNewCourseTitle;
     private EditText editNewCourseStartDate;
     private EditText editNewCourseEndDate;
     private Spinner statusSpinner;
+    private EditText editNewCourseIName;
+    private EditText editNewCourseIEmail;
+    private EditText editNewCourseIPhone;
+
+    //Declare fields for new course object creation
+    private int newCourseId;
+    private String newCourseTitle;
+    private Date newCourseStartDate;
+    private Date newCourseEndDate;
+    private String newCourseStatus;
+    private String newCourseIName;
+    private String newCourseIPhone;
+    private String newCourseIEmail;
+    private int newCourseTermId;
 
     //Initialize date fields
     final Calendar SENT_INFO_CAL = Calendar.getInstance();
@@ -94,7 +110,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
 
         //Set spinner information and populate
         ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
-        statusSpinner = findViewById(R.id.statusSpinner);
+        statusSpinner = findViewById(R.id.spinnerCourseStatus);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         statusSpinner.setAdapter(statusAdapter);
 

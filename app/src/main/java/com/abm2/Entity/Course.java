@@ -20,10 +20,9 @@ public class Course {
     private String instructorName;
     private String instructorEmail;
     private String instructorPhone;
-    private String notes;
     private int termId;
 
-    public Course(int courseId, String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, String notes, int termId) {
+    public Course(int courseId, String title, Date startDate, Date endDate, String status, String instructorName, String instructorEmail, String instructorPhone, int termId) {
         this.courseId = courseId;
         this.title = title;
         this.startDate = startDate;
@@ -32,7 +31,6 @@ public class Course {
         this.instructorName = instructorName;
         this.instructorEmail = instructorEmail;
         this.instructorPhone = instructorPhone;
-        this.notes = notes;
         this.termId = termId;
     }
 
@@ -113,14 +111,6 @@ public class Course {
 
     public void setInstructorPhone(String instructorPhone) {
         this.instructorPhone = instructorPhone;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
     }
 
     public int getTermId() {

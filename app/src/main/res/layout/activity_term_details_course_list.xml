@@ -169,99 +169,187 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:text="Add New Course:"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editNewAssessmentTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:ems="10"
-                    android:hint="Course Title"
-                    android:inputType="text"
-                    android:textAlignment="center" />
+                <androidx.gridlayout.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="16dp"
+                    app:columnCount="2"
+                    app:rowCount="7">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textNewCourseTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Title:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/editNewCourseTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="50dp"
+                        android:ems="10"
+                        android:hint="Course Title"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/textNewCourseStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Start Date:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/editNewCourseStartDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="7dp"
+                        android:layout_marginRight="50dp"
                         android:cursorVisible="false"
                         android:ems="10"
                         android:focusable="false"
                         android:hint="Start Date"
                         android:onClick="onCourseStartDateClick"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textNewCourseEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="End Date:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/editNewCourseEndDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginRight="50dp"
                         android:editable="false"
                         android:ems="10"
                         android:hint="End Date"
                         android:onClick="onCourseEndDateClick"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
+                    <TextView
+                        android:id="@+id/textNewCourseStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Status:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
+                    <Spinner
+                        android:id="@+id/spinnerCourseStatus"
+                        android:layout_width="210dp"
+                        android:layout_height="45dp" />
 
-                <Spinner
-                    android:id="@+id/statusSpinner"
-                    android:layout_width="210dp"
-                    android:layout_height="45dp" />
+                    <TextView
+                        android:id="@+id/textNewCourseIName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Instructor Name:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/editCourseInstructorName"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Instructor Name"
-                    android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/editNewCourseIName"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="50dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Instructor Name"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editCourseInstructorPhone"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Instructor Phone"
-                    android:inputType="phone"
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/textNewCourseIPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Instructor Phone:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/editCourseInstructorEmail"
-                    style="@style/Widget.AppCompat.EditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Instructor Email"
-                    android:inputType="textEmailAddress"
-                    android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/editNewCourseIPhone"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Instructor Phone"
+                        android:inputType="phone"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/btnAddAssessment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onBtnAddNewCourseClick"
-                    android:text="Add" />
+                    <TextView
+                        android:id="@+id/textNewCourseIEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="Instructor Email:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/editNewCourseIEmail"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Instructor Email"
+                        android:inputType="textEmailAddress"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/btnAddCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onBtnAddNewCourseClick"
+                        android:text="Add" />
+                </androidx.gridlayout.widget.GridLayout>
 
             </LinearLayout>
 

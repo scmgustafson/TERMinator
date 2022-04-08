@@ -39,7 +39,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private String sentName;
     private String sentEmail;
     private String sentPhone;
-    private String sentNotes; //TODO IMPLEMENT LIST OF NOTES
     //Fields targeting TextView layout objects
     private TextView courseTerm;
     private TextView courseTitle;
@@ -49,7 +48,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private TextView courseName;
     private TextView courseEmail;
     private TextView coursePhone;
-    private TextView courseNotes; //TODO IMPLEMENT LIST OF NOTES
     //Set date related fields
     private int date, month, year;
     final Calendar SENT_COURSE_CAL = Calendar.getInstance();
@@ -80,7 +78,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseName = findViewById(R.id.textCourseInstructorName);
         courseEmail = findViewById(R.id.textCourseInstructorEmail);
         coursePhone = findViewById(R.id.textCourseInstructorPhone);
-        courseNotes = findViewById(R.id.textNote); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
         sentId = getIntent().getIntExtra("id", -1);
         sentTermId = getIntent().getIntExtra("term", -1);
@@ -91,9 +88,8 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         sentName = getIntent().getStringExtra("instructorName");
         sentPhone = getIntent().getStringExtra("instructorPhone");
         sentEmail = getIntent().getStringExtra("instructorEmail");
-        sentNotes = getIntent().getStringExtra("notes"); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
-        sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentNotes, sentTermId);
+        sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentTermId);
 
         String sentTermTitle = null;
         List<Term> terms = repo.selectAllTerms();
@@ -108,7 +104,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseName.setText(sentName);
         coursePhone.setText(sentPhone);
         courseEmail.setText(sentEmail);
-        courseNotes.setText(sentNotes);
 
         //Set course date information
         SENT_COURSE_CAL.setTime(sentStart);

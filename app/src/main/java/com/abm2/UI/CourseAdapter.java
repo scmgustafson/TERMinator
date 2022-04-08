@@ -32,7 +32,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     final Course currentCourse = allCourses.get(position);
                     Intent intent = new Intent(context, CourseDetailsAssessmentList.class);
                     intent.putExtra("id", currentCourse.getCourseId());
-                    intent.putExtra("term", currentCourse.getTermId()); //TODO IMPLEMENT RETURN OF COURSE NAME FROM ID VIA QUERY?
+                    intent.putExtra("term", currentCourse.getTermId());
                     intent.putExtra("title", currentCourse.getTitle());
                     intent.putExtra("startDateLong", DateConverter.toTimestamp(currentCourse.getStartDate()));
                     intent.putExtra("endDateLong", DateConverter.toTimestamp(currentCourse.getEndDate()));
@@ -40,7 +40,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("instructorName", currentCourse.getInstructorName());
                     intent.putExtra("instructorEmail", currentCourse.getInstructorEmail());
                     intent.putExtra("instructorPhone", currentCourse.getInstructorPhone());
-                    intent.putExtra("notes", currentCourse.getNotes()); //TODO IMPLEMENT LIST OF NOTES
                     context.startActivity(intent);
                 }
             });

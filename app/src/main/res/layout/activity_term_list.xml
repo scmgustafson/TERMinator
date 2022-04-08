@@ -17,7 +17,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical">
 
@@ -25,14 +24,23 @@
                 android:id="@+id/textAddNewAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Add New Term:"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:id="@+id/linearAddAssessment"
+            <androidx.gridlayout.widget.GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:columnCount="2"
+                app:rowCount="4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Term Title:"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/editNewTermTitle"
@@ -41,45 +49,46 @@
                     android:ems="10"
                     android:hint="Term Title"
                     android:inputType="text"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="Start Date:"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/editNewTermStartDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="7dp"
-                        android:cursorVisible="false"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:hint="Start Date"
-                        android:onClick="onStartDateClick"
-                        android:textAlignment="center" />
+                <EditText
+                    android:id="@+id/editNewTermStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="7dp"
+                    android:cursorVisible="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Start Date"
+                    android:onClick="onStartDateClick"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="End Date:"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/editNewTermEndDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:cursorVisible="false"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:hint="End Date"
-                        android:onClick="onEndDateClick"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
+                <EditText
+                    android:id="@+id/editNewTermEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:cursorVisible="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="End Date"
+                    android:onClick="onEndDateClick"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnAddTerm"
@@ -87,14 +96,13 @@
                     android:layout_height="wrap_content"
                     android:onClick="onBtnAddTermClick"
                     android:text="Add" />
-
-            </LinearLayout>
+            </androidx.gridlayout.widget.GridLayout>
 
             <TextView
-                android:id="@+id/textYourTerms"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:gravity="center"
                 android:text="Your Terms:"
                 android:textSize="20sp" />
 
@@ -103,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:background="#BDBDBD"
+                android:layout_marginRight="16dp"
                 android:visibility="visible" />
 
         </LinearLayout>
