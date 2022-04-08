@@ -72,8 +72,9 @@ public class TermDetailsCourseList extends AppCompatActivity {
         sentEndDate = DateConverter.toDate(getIntent().getLongExtra("endDateLong", -1));
 
         sentTerm = new Term(sentId, sentTitle, sentStartDate, sentEndDate);
-        //Current term date information and formatting
+
         editTermTitle.setText(sentTitle);
+        //Current term date information and formatting
         SENT_INFO_CAL.setTime(sentStartDate);
         date = SENT_INFO_CAL.get(Calendar.DATE);
         month = SENT_INFO_CAL.get(Calendar.MONTH);
