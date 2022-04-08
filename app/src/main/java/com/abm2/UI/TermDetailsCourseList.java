@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
-import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
 import com.abm2.R;
@@ -48,8 +47,9 @@ public class TermDetailsCourseList extends AppCompatActivity {
     private Spinner statusSpinner;
 
     //Initialize date fields
+    final Calendar SENT_INFO_CAL = Calendar.getInstance();
     final Calendar NEW_COURSE_CAL = Calendar.getInstance();
-    final Calendar NEW_TERM_CAL = Calendar.getInstance();
+    final Calendar EDIT_TERM_CAL = Calendar.getInstance();
     private int date, month, year;
 
     //Set DB related fields
@@ -72,10 +72,18 @@ public class TermDetailsCourseList extends AppCompatActivity {
         sentEndDate = DateConverter.toDate(getIntent().getLongExtra("endDateLong", -1));
 
         sentTerm = new Term(sentId, sentTitle, sentStartDate, sentEndDate);
-
+        //Current term date information and formatting
         editTermTitle.setText(sentTitle);
-        editTermStartDate.setText(sentStartDate.toString());
-        editTermEndDate.setText(sentEndDate.toString());
+        SENT_INFO_CAL.setTime(sentStartDate);
+        date = SENT_INFO_CAL.get(Calendar.DATE);
+        month = SENT_INFO_CAL.get(Calendar.MONTH);
+        year = SENT_INFO_CAL.get(Calendar.YEAR);
+        editTermStartDate.setText((month+1)+"-"+date+"-"+year);
+        SENT_INFO_CAL.setTime(sentEndDate);
+        date = SENT_INFO_CAL.get(Calendar.DATE);
+        month = SENT_INFO_CAL.get(Calendar.MONTH);
+        year = SENT_INFO_CAL.get(Calendar.YEAR);
+        editTermEndDate.setText((month+1)+"-"+date+"-"+year);
 
         //Set new Course layout items
         editNewCourseStartDate = findViewById(R.id.editNewCourseStartDate);
@@ -93,34 +101,36 @@ public class TermDetailsCourseList extends AppCompatActivity {
     }
 
     public void onTermStartDateClick(View view) {
-        date = NEW_TERM_CAL.get(Calendar.DATE);
-        month = NEW_TERM_CAL.get(Calendar.MONTH);
-        year = NEW_TERM_CAL.get(Calendar.YEAR);
+        EDIT_TERM_CAL.setTime(sentStartDate);
+        date = EDIT_TERM_CAL.get(Calendar.DATE);
+        month = EDIT_TERM_CAL.get(Calendar.MONTH);
+        year = EDIT_TERM_CAL.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TermDetailsCourseList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         editTermStartDate.setText((month+1)+"-"+date+"-"+year);
-                        NEW_COURSE_CAL.set(year, month, date);
-                        newTermStartDate.setTime(NEW_COURSE_CAL.getTimeInMillis());
+                        EDIT_TERM_CAL.set(year, month, date);
+                        newTermStartDate.setTime(EDIT_TERM_CAL.getTimeInMillis());
                     }
                 }, year, month, date);
         datePickerDialog.show();
     }
 
     public void onTermEndDateClick(View view) {
-        date = NEW_TERM_CAL.get(Calendar.DATE);
-        month = NEW_TERM_CAL.get(Calendar.MONTH);
-        year = NEW_TERM_CAL.get(Calendar.YEAR);
+        EDIT_TERM_CAL.setTime(sentEndDate);
+        date = EDIT_TERM_CAL.get(Calendar.DATE);
+        month = EDIT_TERM_CAL.get(Calendar.MONTH);
+        year = EDIT_TERM_CAL.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TermDetailsCourseList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         editTermEndDate.setText((month+1)+"-"+date+"-"+year);
-                        NEW_COURSE_CAL.set(year, month, date);
-                        newTermEndDate.setTime(NEW_COURSE_CAL.getTimeInMillis());
+                        EDIT_TERM_CAL.set(year, month, date);
+                        newTermEndDate.setTime(EDIT_TERM_CAL.getTimeInMillis());
                     }
                 }, year, month, date);
         datePickerDialog.show();
