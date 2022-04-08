@@ -19,6 +19,7 @@ import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
+import com.abm2.Entity.Term;
 import com.abm2.R;
 
 import java.util.Calendar;
@@ -30,7 +31,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     //Variables for holding passed intent data
     private Course sentCourse;
     private int sentId;
-    private int sentTerm;
+    private int sentTermId;
     private String sentTitle;
     private Date sentStart;
     private Date sentEnd;
@@ -51,7 +52,9 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private TextView courseNotes; //TODO IMPLEMENT LIST OF NOTES
     //Set date related fields
     private int date, month, year;
-    final Calendar CAL = Calendar.getInstance();
+    final Calendar SENT_COURSE_CAL = Calendar.getInstance();
+    final Calendar EDIT_COURSE_CAL = Calendar.getInstance();
+    final Calendar NEW_ASS_CAL = Calendar.getInstance();
     //Set DB related fields
     Repository repo;
     //Set fields for new assessment
@@ -66,7 +69,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details_assessment_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Enable top right menu
+        Repository repo = new Repository(getApplication());
 
         //Set Course detailed information
         courseTerm = findViewById(R.id.textCourseTerm);
@@ -80,7 +83,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseNotes = findViewById(R.id.textNote); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
         sentId = getIntent().getIntExtra("id", -1);
-        sentTerm = getIntent().getIntExtra("term", -1);
+        sentTermId = getIntent().getIntExtra("term", -1);
         sentTitle = getIntent().getStringExtra("title");
         sentStart = DateConverter.toDate(getIntent().getLongExtra("startDateLong", -1));
         sentEnd = DateConverter.toDate(getIntent().getLongExtra("endDateLong", -1));
@@ -90,17 +93,34 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         sentEmail = getIntent().getStringExtra("instructorEmail");
         sentNotes = getIntent().getStringExtra("notes"); //TODO IMPLEMENT RECYCLER VIEW FOR NOTES?
 
-        sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentNotes, sentTerm);
+        sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentNotes, sentTermId);
 
-        courseTerm.setText(String.valueOf(sentTerm));
+        String sentTermTitle = null;
+        List<Term> terms = repo.selectAllTerms();
+        for (Term term : terms) {
+            if (term.getTermId() == sentCourse.getTermId()) {
+                sentTermTitle = term.getTitle();
+            }
+        }
+        courseTerm.setText(sentTermTitle);
         courseTitle.setText(sentTitle);
-        courseStart.setText(sentStart.toString());
-        courseEnd.setText(sentEnd.toString());
         courseStatus.setText(sentStatus);
         courseName.setText(sentName);
         coursePhone.setText(sentPhone);
         courseEmail.setText(sentEmail);
         courseNotes.setText(sentNotes);
+
+        //Set course date information
+        SENT_COURSE_CAL.setTime(sentStart);
+        date = SENT_COURSE_CAL.get(Calendar.DATE);
+        month = SENT_COURSE_CAL.get(Calendar.MONTH);
+        year = SENT_COURSE_CAL.get(Calendar.YEAR);
+        courseStart.setText((month+1)+"-"+date+"-"+year);
+        SENT_COURSE_CAL.setTime(sentEnd);
+        date = SENT_COURSE_CAL.get(Calendar.DATE);
+        month = SENT_COURSE_CAL.get(Calendar.MONTH);
+        year = SENT_COURSE_CAL.get(Calendar.YEAR);
+        courseEnd.setText((month+1)+"-"+date+"-"+year);
 
         //Set new assessment layout items
         editNewAssessmentTitle = findViewById(R.id.editNewAssessmentTitle);
@@ -109,13 +129,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         rbNewPerformance = findViewById(R.id.rbNewPerformance);
 
         //Populate recycler view with Term items from DB
-        RecyclerView recyclerView = findViewById(R.id.rvAssessments);
-        Repository repo = new Repository(getApplication());
-        List<Assessment> allAssessments = repo.selectAssessmentsByCourse(sentId);
-        final AssessmentAdapter adapter = new AssessmentAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setAssessments(allAssessments);
+        refreshRecyclerView();
     }
 
     @Override
@@ -125,17 +139,17 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     }
 
     public void onEditEndDateClick(View view) {
-        date = CAL.get(Calendar.DATE);
-        month = CAL.get(Calendar.MONTH);
-        year = CAL.get(Calendar.YEAR);
+        date = NEW_ASS_CAL.get(Calendar.DATE);
+        month = NEW_ASS_CAL.get(Calendar.MONTH);
+        year = NEW_ASS_CAL.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(CourseDetailsAssessmentList.this, android.R.style.Theme_Holo_Light_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         editNewAssessmentEndDate.setText((month+1)+"-"+date+"-"+year);
-                        CAL.set(year, month, date);
-                        newAssessmentEndDate.setTime(CAL.getTimeInMillis());
+                        NEW_ASS_CAL.set(year, month, date);
+                        newAssessmentEndDate.setTime(NEW_ASS_CAL.getTimeInMillis());
                     }
                 }, year, month, date);
         datePickerDialog.show();
