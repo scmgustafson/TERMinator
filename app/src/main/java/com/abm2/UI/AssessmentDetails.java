@@ -3,8 +3,6 @@ package com.abm2.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +19,7 @@ import com.abm2.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class AssessmentDetails extends AppCompatActivity {
     //Declare layout related fields
@@ -30,7 +29,7 @@ public class AssessmentDetails extends AppCompatActivity {
     private String sentTitle;
     private Long sentEndLong;
     private String sentType;
-    private String sentCourse;
+    private String sentCourseId;
     //Fields for targetting TextView UI objects
     private TextView textTitle;
     private TextView textEnd;
@@ -47,6 +46,7 @@ public class AssessmentDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_details);
+        repo = new Repository(getApplication());
         //Set Assessment detailed information
         textTitle = findViewById(R.id.textAssessmentTitle);
         textEnd = findViewById(R.id.textAssessmentEnd);
@@ -59,16 +59,19 @@ public class AssessmentDetails extends AppCompatActivity {
         sentEndLong = getIntent().getLongExtra("endDate", -1);
         endDate = DateConverter.toDate(sentEndLong);
         sentType = getIntent().getStringExtra("type");
-        sentCourse = getIntent().getStringExtra("course");
+        sentCourseId = getIntent().getStringExtra("course");
 
         //Create Assessment object out of sent data
-        sentAssessment = new Assessment(sentId, sentTitle, endDate, sentType, Integer.valueOf(sentCourse));
+        sentAssessment = new Assessment(sentId, sentTitle, endDate, sentType, Integer.valueOf(sentCourseId));
 
         CAL.setTime(endDate);
 
+        //Get course title based on course ID
+        List<Course> courses = repo.selectCourseById(Integer.valueOf(sentCourseId));
+        String courseTitle = courses.get(0).getTitle();
+        textCourse.setText(courseTitle);
         textTitle.setText(sentTitle);
         textEnd.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
-        textCourse.setText(sentCourse);
         if (sentType.toLowerCase().equals("objective")) {
             rbObjective.setChecked(true);
         }
