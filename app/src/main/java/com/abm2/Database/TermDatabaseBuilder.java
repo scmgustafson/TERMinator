@@ -13,17 +13,20 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.abm2.DAO.AssessmentDAO;
 import com.abm2.DAO.CourseDAO;
+import com.abm2.DAO.NoteDAO;
 import com.abm2.DAO.TermDAO;
 import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
+import com.abm2.Entity.Note;
 
-@Database(entities={Term.class, Course.class, Assessment.class}, version=5, exportSchema = false)
+@Database(entities={Term.class, Course.class, Assessment.class, Note.class}, version=7, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class TermDatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
     public abstract AssessmentDAO assessmentDAO();
+    public abstract NoteDAO noteDAO();
 
     private static volatile TermDatabaseBuilder INSTANCE;
 

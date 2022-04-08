@@ -4,11 +4,14 @@ import android.app.Application;
 
 import com.abm2.DAO.AssessmentDAO;
 import com.abm2.DAO.CourseDAO;
+import com.abm2.DAO.NoteDAO;
 import com.abm2.DAO.TermDAO;
 import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
+import com.abm2.Entity.Note;
 import com.abm2.Entity.Term;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,10 +21,12 @@ public class Repository {
     private TermDAO termDAO;
     private CourseDAO courseDAO;
     private AssessmentDAO assessmentDAO;
+    private NoteDAO noteDAO;
 
     private List<Term> allTerms;
     private List<Course> allCourses;
     private List<Assessment> allAssessments;
+    private List<Note> allNotes;
 
     //Make new thread
     private static final int NUMBER_OF_THREADS = 4;
@@ -32,6 +37,7 @@ public class Repository {
         termDAO = db.termDAO();
         courseDAO = db.courseDAO();
         assessmentDAO = db.assessmentDAO();
+        noteDAO = db.noteDAO();
     }
 
     //Define CRUD methods for Term entity
@@ -223,4 +229,66 @@ public class Repository {
         return allAssessments;
     }
 
+    //Define CRUD methods for Note entity
+    public void insert(Note note) {
+        databaseExecutor.execute(()->{
+            noteDAO.insert(note);
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Note note) {
+        databaseExecutor.execute(()->{
+            noteDAO.update(note);
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Note note) {
+        databaseExecutor.execute(()->{
+            noteDAO.delete(note);
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Note> selectAllNotes() {
+        databaseExecutor.execute(()->{
+            allNotes = noteDAO.selectAllNotes();
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return allNotes;
+    }
+
+    public List<Note> selectNotesByCourseId(int courseId) {
+        databaseExecutor.execute(()->{
+            allNotes = noteDAO.selectNotesByCourseId(courseId);
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return allNotes;
+    }
 }
