@@ -166,7 +166,24 @@ public class TermDetailsCourseList extends AppCompatActivity {
     }
 
     public void onBtnDeleteTermClick(View view) {
+        repo = new Repository(getApplication());
+        List<Course> currentTermCourses = repo.selectCourseByTerm(sentTerm.getTermId());
+        if (currentTermCourses.size() > 0) {
+            Toast toast = Toast.makeText(getApplication(), "Term cannot be deleted because it has existing courses. Please delete all courses for this term first.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if (currentTermCourses.size() == 0){
+            repo.delete(sentTerm);
 
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "Deleting term...", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+            //Move to previous screen
+            this.finish();
+        }
     }
 
     public void onCourseStartDateClick(View view) {
