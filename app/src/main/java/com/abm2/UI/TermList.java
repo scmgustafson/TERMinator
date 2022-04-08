@@ -95,9 +95,12 @@ public class TermList extends AppCompatActivity {
 
     public void onBtnAddTermClick(View view) {
         Repository repo = new Repository(getApplication());
-        //Get new ID for term by getting last term and incrementing ID
+        //Get new ID for term by getting last term and incrementing ID or starting at 1
+        int newId = 1;
         List<Term> allTerms = repo.selectAllTerms();
-        int newId = (allTerms.get(allTerms.size()-1).getTermId()) + 1;
+        if (allTerms.size() > 0) {
+            newId = (allTerms.get(allTerms.size()-1).getTermId()) + 1;
+        }
         newTitle = null;
         try {
             newTitle = String.valueOf(editNewTermTitle.getText());

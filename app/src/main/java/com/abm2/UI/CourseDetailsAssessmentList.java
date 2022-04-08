@@ -183,7 +183,10 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
             }
             //Get new ID for assessment
             List<Assessment> allAssessments = repo.selectAllAssessments();
-            int newId = (allAssessments.get(allAssessments.size()-1).getAssessmentId()) + 1;
+            int newId = 1;
+            if (allAssessments.size() > 0) {
+                newId = (allAssessments.get(allAssessments.size()-1).getAssessmentId()) + 1;
+            }
             Assessment newAssessment = new Assessment(newId, newTitle, newAssessmentEndDate, newType, sentCourse.getCourseId());
             repo.insert(newAssessment);
 
