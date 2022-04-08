@@ -31,8 +31,6 @@ public class TermList extends AppCompatActivity {
     //Prepare date fields
     final Calendar CAL = Calendar.getInstance();
     private int date, month, year;
-    String dateFormat = "MM/dd/yy";
-    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
     Date startDate = new Date();
     Date endDate = new Date();
 
@@ -41,8 +39,8 @@ public class TermList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
 
-        startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.editTextEndDate);
+        startDateText = findViewById(R.id.editStartDate);
+        endDateText = findViewById(R.id.editEndDate);
 
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvTerms);
@@ -102,7 +100,7 @@ public class TermList extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void onAddBtnClick(View view) {
+    public void onBtnAddTermClick(View view) {
 
     }
 
