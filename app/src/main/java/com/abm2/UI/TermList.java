@@ -53,6 +53,12 @@ public class TermList extends AppCompatActivity {
         refreshRecycler();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshRecycler();
+    }
+
     public void onStartDateClick(View view) {
         date = CAL.get(Calendar.DATE);
         month = CAL.get(Calendar.MONTH);

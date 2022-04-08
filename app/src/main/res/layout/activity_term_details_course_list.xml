@@ -37,35 +37,123 @@
                     android:layout_marginLeft="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textTermTitle"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTermTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Term:"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/editTermTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Term Title"
+                            android:inputType="textShortMessage"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTermStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Start Date:"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/editTermStartDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:cursorVisible="false"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:hint="Start Date"
+                            android:inputType="textShortMessage"
+                            android:onClick="onTermStartDateClick"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTermEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginRight="10dp"
+                            android:text="End Date:"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toEndOf="@+id/textTermDetails"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/editTermEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:cursorVisible="false"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:hint="End Date"
+                            android:inputType="textShortMessage"
+                            android:onClick="onTermEndDateClick"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnSaveTerm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="TERM TITLE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginRight="20dp"
+                        android:onClick="onBtnSaveTermClick"
+                        android:text="Save" />
 
-                    <TextView
-                        android:id="@+id/textTermStart"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/btnDeleteTerm"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="TERM START DATE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textTermEnd"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="TERM END DATE"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textTermDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginRight="20dp"
+                        android:onClick="onBtnDeleteTermClick"
+                        android:text="DELETE" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -99,22 +187,16 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/startDateText"
+                        android:id="@+id/editNewCourseStartDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="7dp"
-                        android:editable="false"
+                        android:cursorVisible="false"
                         android:ems="10"
+                        android:focusable="false"
                         android:hint="Start Date"
+                        android:onClick="onCourseStartDateClick"
                         android:textAlignment="center" />
-
-                    <ImageView
-                        android:id="@+id/startDateImg"
-                        android:layout_width="51dp"
-                        android:layout_height="48dp"
-                        android:layout_marginLeft="8dp"
-                        android:onClick="onStartDateImgClick"
-                        app:srcCompat="@drawable/ic_baseline_add_24" />
 
                 </LinearLayout>
 
@@ -124,22 +206,16 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/editNewAssessmentEndDate"
+                        android:id="@+id/editNewCourseEndDate"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginTop="8dp"
                         android:editable="false"
                         android:ems="10"
                         android:hint="End Date"
+                        android:onClick="onCourseEndDateClick"
                         android:textAlignment="center" />
 
-                    <ImageView
-                        android:id="@+id/endDateImg"
-                        android:layout_width="51dp"
-                        android:layout_height="48dp"
-                        android:layout_marginLeft="8dp"
-                        android:onClick="onEndDateImgClick"
-                        app:srcCompat="@drawable/ic_baseline_add_24" />
 
                 </LinearLayout>
 
