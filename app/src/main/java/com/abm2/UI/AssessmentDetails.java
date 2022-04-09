@@ -50,7 +50,6 @@ public class AssessmentDetails extends AppCompatActivity {
         //Set Assessment detailed information
         textTitle = findViewById(R.id.textAssessmentTitle);
         textEnd = findViewById(R.id.textAssessmentEnd);
-        textCourse = findViewById(R.id.textAssessmentCourse);
         rbObjective = findViewById(R.id.rbDetailsObjective);
         rbPerformance = findViewById(R.id.rbDetailsPerformance);
 
@@ -69,7 +68,6 @@ public class AssessmentDetails extends AppCompatActivity {
         //Get course title based on course ID
         List<Course> courses = repo.selectCourseById(Integer.valueOf(sentCourseId));
         String courseTitle = courses.get(0).getTitle();
-        textCourse.setText(courseTitle);
         textTitle.setText(sentTitle);
         textEnd.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
         if (sentType.toLowerCase().equals("objective")) {

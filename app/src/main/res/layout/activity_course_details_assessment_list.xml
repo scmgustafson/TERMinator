@@ -44,28 +44,6 @@
                     app:rowCount="8">
 
                     <TextView
-                        android:id="@+id/textCourseTerm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:text="Term:"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/textAssessmentDetails"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/editCourseTermTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Term Name"
-                        android:inputType="textPersonName"
-                        android:textAlignment="center"
-                        android:textSize="20sp"
-                        android:focusable="false"
-                        android:cursorVisible="false"/>
-
-                    <TextView
                         android:id="@+id/textCourseTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -79,9 +57,7 @@
                         android:id="@+id/editCourseTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
                         android:ems="10"
-                        android:focusable="false"
                         android:hint="Course Name"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
@@ -106,6 +82,7 @@
                         android:focusable="false"
                         android:hint="Date"
                         android:inputType="textPersonName"
+                        android:onClick="onCourseStartDateClick"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -128,6 +105,7 @@
                         android:focusable="false"
                         android:hint="Date"
                         android:inputType="textPersonName"
+                        android:onClick="onCourseEndDateClick"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -161,9 +139,7 @@
                         android:id="@+id/editCourseInstructorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
                         android:ems="10"
-                        android:focusable="false"
                         android:hint="Name"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
@@ -183,9 +159,7 @@
                         android:id="@+id/editCourseInstructorPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
                         android:ems="10"
-                        android:focusable="false"
                         android:hint="Phone Number"
                         android:inputType="textShortMessage|none|phone"
                         android:textAlignment="center"
@@ -205,9 +179,7 @@
                         android:id="@+id/editCourseInstructorEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
                         android:ems="10"
-                        android:focusable="false"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:textAlignment="center"
@@ -216,10 +188,23 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:orientation="horizontal">
 
+                    <Button
+                        android:id="@+id/btnSaveCourseEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/btnDeleteCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="Delete" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -285,7 +270,6 @@
                     android:id="@+id/btnAddNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onBtnAddNewAssessmentClick"
                     android:text="Add" />
 
             </LinearLayout>
@@ -329,7 +313,7 @@
                         android:ems="10"
                         android:focusable="false"
                         android:hint="Assessment Date"
-                        android:onClick="onEditEndDateClick"
+                        android:onClick="onAssessmentEndDateClick"
                         android:textAlignment="center" />
 
                 </LinearLayout>
@@ -385,15 +369,6 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/imgAssessmentRefresh"
-                        android:layout_width="94dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_weight="1"
-                        android:onClick="onImgAssessmentRefreshClick"
-                        app:srcCompat="@drawable/ic_baseline_refresh_24" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

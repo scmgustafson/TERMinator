@@ -95,7 +95,7 @@
                             android:focusable="false"
                             android:hint="Start Date"
                             android:inputType="textShortMessage"
-                            android:onClick="onTermStartDateClick"
+                            android:onClick="onCourseStartDateClick"
                             android:textAlignment="center"
                             android:textSize="20sp" />
 
@@ -128,7 +128,7 @@
                             android:focusable="false"
                             android:hint="End Date"
                             android:inputType="textShortMessage"
-                            android:onClick="onTermEndDateClick"
+                            android:onClick="onCourseEndDateClick"
                             android:textAlignment="center"
                             android:textSize="20sp" />
 

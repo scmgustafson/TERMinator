@@ -51,6 +51,9 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private TextView courseName;
     private TextView courseEmail;
     private TextView coursePhone;
+    //Declare fields for editing Course object
+    private Date editCourseStartDate = new Date();
+    private Date editCourseEndDate = new Date();
     //Set date related fields
     private int date, month, year;
     final Calendar SENT_COURSE_CAL = Calendar.getInstance();
@@ -73,7 +76,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         Repository repo = new Repository(getApplication());
 
         //Set Course detailed information
-        courseTerm = findViewById(R.id.editCourseTermTitle);
         courseTitle = findViewById(R.id.editCourseTitle);
         courseStart = findViewById(R.id.editCourseStartDate);
         courseEnd = findViewById(R.id.editCourseEndDate);
@@ -124,7 +126,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseStatus.setSelection(pos);
 
         //Set other detailed course information
-        courseTerm.setText(sentTermTitle);
         courseTitle.setText(sentTitle);
         courseName.setText(sentName);
         coursePhone.setText(sentPhone);
@@ -158,7 +159,43 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         refreshRecyclerView();
     }
 
-    public void onEditEndDateClick(View view) {
+    public void onCourseStartDateClick(View view) {
+        EDIT_COURSE_CAL.setTime(sentStart);
+        date = EDIT_COURSE_CAL.get(Calendar.DATE);
+        month = EDIT_COURSE_CAL.get(Calendar.MONTH);
+        year = EDIT_COURSE_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CourseDetailsAssessmentList.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        courseStart.setText((month+1)+"-"+date+"-"+year);
+                        EDIT_COURSE_CAL.set(year, month, date);
+                        editCourseStartDate.setTime(EDIT_COURSE_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onCourseEndDateClick(View view) {
+        EDIT_COURSE_CAL.setTime(sentEnd);
+        date = EDIT_COURSE_CAL.get(Calendar.DATE);
+        month = EDIT_COURSE_CAL.get(Calendar.MONTH);
+        year = EDIT_COURSE_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CourseDetailsAssessmentList.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        courseEnd.setText((month+1)+"-"+date+"-"+year);
+                        EDIT_COURSE_CAL.set(year, month, date);
+                        editCourseEndDate.setTime(EDIT_COURSE_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onAssessmentEndDateClick(View view) {
         date = NEW_ASS_CAL.get(Calendar.DATE);
         month = NEW_ASS_CAL.get(Calendar.MONTH);
         year = NEW_ASS_CAL.get(Calendar.YEAR);
@@ -222,10 +259,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     public void onTextAssessmentTitleClick(View view) {
         Intent intent = new Intent(CourseDetailsAssessmentList.this, AssessmentDetails.class);
         startActivity(intent);
-    }
-
-    public void onImgAssessmentRefreshClick(View view) {
-        refreshRecyclerView();
     }
 
     public void refreshRecyclerView() {
