@@ -286,7 +286,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
         if ((newCourseTitle.equals("") || newCourseTitle.equals(null)) || (newCourseIName.equals("") || newCourseIName.equals(null))
         || (newCourseIPhone.equals("") || newCourseIPhone.equals(null)) || (newCourseIEmail.equals("") || newCourseIEmail.equals(null))) {
             //Set Toast error message then show to user
-            Toast toast = Toast.makeText(getApplication(), "Title field must not be blank", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplication(), "All fields must not be blank", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
         }
@@ -311,6 +311,8 @@ public class TermDetailsCourseList extends AppCompatActivity {
             }
         }
         refreshCourseRecyclerView();
+        RecyclerView recyclerView = findViewById(R.id.rvCourses);
+        recyclerView.requestFocus();
     }
 
     public void onTextCourseTitleClick(View view) {

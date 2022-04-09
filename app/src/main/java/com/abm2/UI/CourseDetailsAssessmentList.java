@@ -43,14 +43,13 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private String sentEmail;
     private String sentPhone;
     //Declare fields for Course details layout
-    private TextView courseTerm;
-    private TextView courseTitle;
-    private TextView courseStart;
-    private TextView courseEnd;
+    private EditText courseTitle;
+    private EditText courseStart;
+    private EditText courseEnd;
     private Spinner courseStatus;
     private TextView courseName;
-    private TextView courseEmail;
-    private TextView coursePhone;
+    private EditText courseEmail;
+    private EditText coursePhone;
     //Declare fields for editing Course object
     private Date editCourseStartDate = new Date();
     private Date editCourseEndDate = new Date();
@@ -142,12 +141,14 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         month = SENT_COURSE_CAL.get(Calendar.MONTH);
         year = SENT_COURSE_CAL.get(Calendar.YEAR);
         courseEnd.setText((month+1)+"-"+date+"-"+year);
+        editCourseStartDate.setTime(DateConverter.toTimestamp(sentStart));
 
         //Set new assessment layout items
         editNewAssessmentTitle = findViewById(R.id.editNewAssessmentTitle);
         editNewAssessmentEndDate = findViewById(R.id.editNewAssessmentEndDate);
         rbNewObjective = findViewById(R.id.rbNewObjective);
         rbNewPerformance = findViewById(R.id.rbNewPerformance);
+        editCourseEndDate.setTime((DateConverter.toTimestamp(sentEnd)));
 
         //Populate recycler view with Term items from DB
         refreshRecyclerView();
@@ -193,6 +194,71 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
                     }
                 }, year, month, date);
         datePickerDialog.show();
+    }
+
+    public void onBtnEditCourseClick(View view) {
+        Repository repo = new Repository(getApplication());
+        //Get new ID for Course by getting last existing course and incrementing ID or starting at 1
+        int courseId = sentCourse.getCourseId();
+        int termId = sentCourse.getTermId();
+        //Read in values of EditText fields for new object creation
+        String newCourseTitle = null;
+        String newCourseStatus = null;
+        String newCourseIName = null;
+        String newCourseIPhone = null;
+        String newCourseIEmail = null;
+        try {
+            newCourseTitle = String.valueOf(courseTitle.getText());
+            newCourseStatus = courseStatus.getSelectedItem().toString();
+            newCourseIName = String.valueOf(courseName.getText());
+            newCourseIPhone = String.valueOf(coursePhone.getText());
+            newCourseIEmail = String.valueOf(courseEmail.getText());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Check for blank fields
+        if ((newCourseTitle.equals("") || newCourseTitle.equals(null)) || (newCourseIName.equals("") || newCourseIName.equals(null))
+                || (newCourseIPhone.equals("") || newCourseIPhone.equals(null)) || (newCourseIEmail.equals("") || newCourseIEmail.equals(null))) {
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "All fields must not be blank", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else {
+            //Check dates
+            if (editCourseEndDate.before(editCourseStartDate) || editCourseEndDate.equals(editCourseStartDate)) {
+                //Set Toast error message then show to user
+                Toast toast = Toast.makeText(getApplication(), "Course end date must be after course start date", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+            else {
+                Course newCourse = new Course(courseId, newCourseTitle, editCourseStartDate, editCourseEndDate, newCourseStatus, newCourseIName, newCourseIPhone, newCourseIEmail, termId);
+                repo.update(newCourse);
+
+                //Set Toast error message then show to user
+                Toast toast = Toast.makeText(getApplication(), "Course saved!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+
+                //Move to previous screen
+                this.finish();
+            }
+        }
+    }
+
+    public void onBtnDeleteCourseClick(View view) {
+        repo = new Repository(getApplication());
+        repo.delete(sentCourse);
+
+        //Set Toast error message then show to user
+        Toast toast = Toast.makeText(getApplication(), "Deleting course...", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+
+        //Move to previous screen
+        this.finish();
     }
 
     public void onAssessmentEndDateClick(View view) {
@@ -254,6 +320,8 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         }
 
         refreshRecyclerView();
+        RecyclerView recyclerView = findViewById(R.id.rvAssessments);
+        recyclerView.requestFocus();
     }
 
     public void onTextAssessmentTitleClick(View view) {
