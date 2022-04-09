@@ -265,7 +265,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
         newCourseId = 1;
         List<Course> allCourses = repo.selectAllCourses();
         if (allCourses.size() > 0) {
-            newCourseId = (allCourses.get(allCourses.size()-1).getTermId()) + 1;
+            newCourseId = (allCourses.get(allCourses.size()-1).getCourseId()) + 1;
         }
         newCourseTitle = null;
         newCourseIName = null;
@@ -301,7 +301,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
                 toast.show();
             }
             else {
-                Course newCourse = new Course(newCourseId, newCourseTitle, newCourseStartDate, newCourseEndDate, newCourseStatus, newCourseIName, newCourseIPhone, newCourseIEmail, sentTerm.getTermId());
+                Course newCourse = new Course(newCourseId, newCourseTitle, newCourseStartDate, newCourseEndDate, newCourseStatus, newCourseIName, newCourseIEmail, newCourseIPhone, sentTerm.getTermId());
                 repo.insert(newCourse);
 
                 //Set Toast error message then show to user
