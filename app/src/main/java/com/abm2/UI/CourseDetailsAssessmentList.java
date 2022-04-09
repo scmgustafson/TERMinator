@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +25,12 @@ import com.abm2.Entity.Course;
 import com.abm2.Entity.Term;
 import com.abm2.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class CourseDetailsAssessmentList extends AppCompatActivity {
-    //Declare layout related fields
     //Variables for holding passed intent data
     private Course sentCourse;
     private int sentId;
@@ -39,12 +42,12 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     private String sentName;
     private String sentEmail;
     private String sentPhone;
-    //Fields targeting TextView layout objects
+    //Declare fields for Course details layout
     private TextView courseTerm;
     private TextView courseTitle;
     private TextView courseStart;
     private TextView courseEnd;
-    private TextView courseStatus;
+    private Spinner courseStatus;
     private TextView courseName;
     private TextView courseEmail;
     private TextView coursePhone;
@@ -70,14 +73,14 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         Repository repo = new Repository(getApplication());
 
         //Set Course detailed information
-        courseTerm = findViewById(R.id.textCourseTerm);
-        courseTitle = findViewById(R.id.textCourseTitle);
-        courseStart = findViewById(R.id.textCourseStart);
-        courseEnd = findViewById(R.id.textCourseEnd);
-        courseStatus = findViewById(R.id.textCourseStatus);
-        courseName = findViewById(R.id.textCourseInstructorName);
-        courseEmail = findViewById(R.id.textCourseInstructorEmail);
-        coursePhone = findViewById(R.id.textCourseInstructorPhone);
+        courseTerm = findViewById(R.id.editCourseTermTitle);
+        courseTitle = findViewById(R.id.editCourseTitle);
+        courseStart = findViewById(R.id.editCourseStartDate);
+        courseEnd = findViewById(R.id.editCourseEndDate);
+        courseStatus = findViewById(R.id.editCourseStatusSpinner);
+        courseName = findViewById(R.id.editCourseInstructorName);
+        courseEmail = findViewById(R.id.editCourseInstructorEmail);
+        coursePhone = findViewById(R.id.editCourseInstructorPhone);
 
         sentId = getIntent().getIntExtra("id", -1);
         sentTermId = getIntent().getIntExtra("term", -1);
@@ -98,9 +101,31 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
                 sentTermTitle = term.getTitle();
             }
         }
+
+        //Set spinner information and populate
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        courseStatus.setAdapter(statusAdapter);
+        Resources res = getResources();
+        //Compare sent status string to string array to get index position to set spinner
+        ArrayList<String> statusStrings = new ArrayList<String>();
+        for (String string : res.getStringArray(R.array.status_array)) {
+            statusStrings.add(string);
+        }
+        int pos = 0;
+        for (String string : statusStrings) {
+            if (sentStatus.equals(string)) {
+                break;
+            }
+            else {
+                pos += 1;
+            }
+        }
+        courseStatus.setSelection(pos);
+
+        //Set other detailed course information
         courseTerm.setText(sentTermTitle);
         courseTitle.setText(sentTitle);
-        courseStatus.setText(sentStatus);
         courseName.setText(sentName);
         coursePhone.setText(sentPhone);
         courseEmail.setText(sentEmail);
