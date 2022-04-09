@@ -122,6 +122,12 @@ public class TermDetailsCourseList extends AppCompatActivity {
         refreshCourseRecyclerView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshCourseRecyclerView();
+    }
+
     public void onTermStartDateClick(View view) {
         EDIT_TERM_CAL.setTime(sentStartDate);
         date = EDIT_TERM_CAL.get(Calendar.DATE);
@@ -170,7 +176,7 @@ public class TermDetailsCourseList extends AppCompatActivity {
             //Check for blank fields
             if (newTermTitle.equals("") || newTermTitle.equals(null)) {
                 //Set Toast error message then show to user
-                Toast toast = Toast.makeText(getApplication(), "Title field must not be blank", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplication(), "All fields must not be blank", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
