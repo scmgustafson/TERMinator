@@ -28,10 +28,12 @@
 
                 <TextView
                     android:id="@+id/textAssessmentDetails"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Course Details:"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,6 +128,37 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearCourseNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textCourseNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Course Notes:"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linearNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCourseNotes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linearAddNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,11 +166,13 @@
 
                 <TextView
                     android:id="@+id/textAddNotes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:text="Add Note:"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextTextMultiLine"
@@ -159,37 +194,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearCourseNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textCourseNotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Course Notes:"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:id="@+id/linearNotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textNote"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="EXAMPLE NOTES"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/linearAddAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -200,8 +204,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:text="Add New Assessment:"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editNewAssessmentTitle"
@@ -269,8 +275,9 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
@@ -278,12 +285,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Course Assessments"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imgAssessmentRefresh"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="94dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="10dp"
                         android:layout_weight="1"
