@@ -78,11 +78,9 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Repository repo = new Repository(getApplication());
+        repo = new Repository(getApplication());
         //Setup action bar
         setContentView(R.layout.activity_course_details_assessment_list);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Set Course detailed information
         courseTitle = findViewById(R.id.editCourseTitle);
@@ -102,24 +100,16 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         sentName = getIntent().getStringExtra("instructorName");
         sentPhone = getIntent().getStringExtra("instructorPhone");
         sentEmail = getIntent().getStringExtra("instructorEmail");
-
         sentCourse = new Course(sentId, sentTitle, sentStart, sentEnd, sentStatus, sentName, sentPhone, sentEmail, sentTermId);
-
-        String sentTermTitle = null;
-        List<Term> terms = repo.selectAllTerms();
-        for (Term term : terms) {
-            if (term.getTermId() == sentCourse.getTermId()) {
-                sentTermTitle = term.getTitle();
-            }
-        }
 
         //Set spinner information and populate
         ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         courseStatus.setAdapter(statusAdapter);
         Resources res = getResources();
+
         //Compare sent status string to string array to get index position to set spinner
-        ArrayList<String> statusStrings = new ArrayList<String>();
+        ArrayList<String> statusStrings = new ArrayList<>();
         for (String string : res.getStringArray(R.array.status_array)) {
             statusStrings.add(string);
         }
@@ -233,11 +223,11 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         int courseId = sentCourse.getCourseId();
         int termId = sentCourse.getTermId();
         //Read in values of EditText fields for new object creation
-        String newCourseTitle = null;
-        String newCourseStatus = null;
-        String newCourseIName = null;
-        String newCourseIPhone = null;
-        String newCourseIEmail = null;
+        String newCourseTitle = "";
+        String newCourseStatus = "";
+        String newCourseIName = "";
+        String newCourseIPhone = "";
+        String newCourseIEmail = "";
         try {
             newCourseTitle = String.valueOf(courseTitle.getText());
             newCourseStatus = courseStatus.getSelectedItem().toString();
@@ -357,8 +347,8 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
 
     public void onBtnAddNewAssessmentClick(View view) {
         repo = new Repository(getApplication());
-        String newTitle = null;
-        String newType = null;
+        String newTitle = "";
+        String newType = "";
         int newCourseId = sentCourse.getCourseId();
         try {
             newTitle = String.valueOf(editNewAssessmentTitle.getText());
@@ -399,11 +389,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         refreshAssessmentRecyclerView();
         RecyclerView recyclerView = findViewById(R.id.rvAssessments);
         recyclerView.requestFocus();
-    }
-
-    public void onTextAssessmentTitleClick(View view) {
-        Intent intent = new Intent(CourseDetailsAssessmentList.this, AssessmentDetails.class);
-        startActivity(intent);
     }
 
     public void refreshNotesRecyclerView() {
