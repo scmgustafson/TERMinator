@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2">
         <activity
+            android:name=".UI.NoteDetails"
+            android:label="Note Details"
+            android:parentActivityName=".UI.CourseDetailsAssessmentList"
+            android:exported="false"/>
+        <activity
             android:name=".UI.AssessmentDetails"
             android:label="Assessment Details"
             android:parentActivityName=".UI.CourseDetailsAssessmentList"

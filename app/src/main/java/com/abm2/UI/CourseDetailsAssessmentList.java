@@ -25,6 +25,7 @@ import com.abm2.Database.DateConverter;
 import com.abm2.Database.Repository;
 import com.abm2.Entity.Assessment;
 import com.abm2.Entity.Course;
+import com.abm2.Entity.Note;
 import com.abm2.Entity.Term;
 import com.abm2.R;
 
@@ -63,6 +64,9 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     final Calendar NEW_ASS_CAL = Calendar.getInstance();
     //Set DB related fields
     Repository repo;
+    //Set fields for new Note
+    private String newNoteText;
+    private EditText editNewNote;
     //Set fields for new assessment
     private EditText editNewAssessmentTitle;
     private EditText editNewAssessmentEndDate;
@@ -149,6 +153,9 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         courseEnd.setText((month+1)+"-"+date+"-"+year);
         editCourseStartDate.setTime(DateConverter.toTimestamp(sentStart));
 
+        //Set new note layout items
+        editNewNote = findViewById(R.id.editNoteText);
+
         //Set new assessment layout items
         editNewAssessmentTitle = findViewById(R.id.editNewAssessmentTitle);
         editNewAssessmentEndDate = findViewById(R.id.editNewAssessmentEndDate);
@@ -156,8 +163,8 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         rbNewPerformance = findViewById(R.id.rbNewPerformance);
         editCourseEndDate.setTime((DateConverter.toTimestamp(sentEnd)));
 
-        //Populate recycler view with Term items from DB
-        refreshRecyclerView();
+        //Populate recycler view with Assessment items from DB
+        refreshAssessmentRecyclerView();
     }
 
     @Override
@@ -169,7 +176,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        refreshRecyclerView();
+        refreshAssessmentRecyclerView();
     }
 
     @Override
@@ -283,6 +290,51 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         this.finish();
     }
 
+    public void onBtnAddNoteClick(View view) {
+        //Read in new note value
+        newNoteText = null;
+        int courseId = sentCourse.getCourseId();
+        //Generate new note id
+        List<Note> allNotes = repo.selectAllNotes();
+        int newId = 1;
+        if (allNotes.size() > 0) {
+            newId = (allNotes.get(allNotes.size()-1).getNoteId()) + 1;
+        }
+        //Begin input validation
+        try {
+            newNoteText = String.valueOf(editNewNote.getText());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Check for blank
+        if (newNoteText.equals("") || newNoteText.equals(null)) {
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "Note text must not be blank", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else {
+            //Create new note object and add to DB
+            Note note = new Note(newId, newNoteText, courseId);
+            Repository repo = new Repository(getApplication());
+            repo.insert(note);
+
+            //Set Toast error message then show to user
+            Toast toast = Toast.makeText(getApplication(), "Note saved!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+            //Clear note field
+            editNewNote.setText("");
+
+            //Refresh note RV and focus on RV
+            refreshNotesRecyclerView();
+            RecyclerView recyclerView = findViewById(R.id.rvCourseNotes);
+            recyclerView.requestFocus();
+        }
+    }
+
     public void onAssessmentEndDateClick(View view) {
         date = NEW_ASS_CAL.get(Calendar.DATE);
         month = NEW_ASS_CAL.get(Calendar.MONTH);
@@ -341,7 +393,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
             toast.show();
         }
 
-        refreshRecyclerView();
+        refreshAssessmentRecyclerView();
         RecyclerView recyclerView = findViewById(R.id.rvAssessments);
         recyclerView.requestFocus();
     }
@@ -351,7 +403,17 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void refreshRecyclerView() {
+    public void refreshNotesRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.rvCourseNotes);
+        Repository repo = new Repository(getApplication());
+        List<Note> allNotes = repo.selectNotesByCourseId(sentCourse.getCourseId());
+        final NoteAdapter adapter = new NoteAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setNotes(allNotes);
+    }
+
+    public void refreshAssessmentRecyclerView() {
         //Populate recycler view with Term items from DB
         RecyclerView recyclerView = findViewById(R.id.rvAssessments);
         Repository repo = new Repository(getApplication());

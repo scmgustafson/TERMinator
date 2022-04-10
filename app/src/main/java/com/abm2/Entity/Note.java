@@ -12,7 +12,8 @@ public class Note {
     private String text;
     private int courseId;
 
-    public Note(String text, int courseId) {
+    public Note(int noteId, String text, int courseId) {
+        this.noteId = noteId;
         this.text = text;
         this.courseId = courseId;
     }

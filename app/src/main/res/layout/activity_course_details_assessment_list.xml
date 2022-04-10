@@ -227,6 +227,14 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tap to edit, delete, or share notes"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
                 <LinearLayout
                     android:id="@+id/linearNotes"
                     android:layout_width="match_parent"
@@ -237,7 +245,9 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCourseNotes"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -246,6 +256,7 @@
                 android:id="@+id/linearAddNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -259,19 +270,21 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine"
+                    android:id="@+id/editNoteText"
                     android:layout_width="377dp"
                     android:layout_height="124dp"
                     android:ems="10"
                     android:gravity="start|top"
                     android:hint="Notes"
                     android:inputType="textMultiLine"
-                    android:singleLine="false" />
+                    android:singleLine="false"
+                    android:textAlignment="viewStart" />
 
                 <Button
                     android:id="@+id/btnAddNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onBtnAddNoteClick"
                     android:text="Add" />
 
             </LinearLayout>
@@ -280,6 +293,7 @@
                 android:id="@+id/linearAddAssessment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:orientation="vertical">
 
                 <TextView
