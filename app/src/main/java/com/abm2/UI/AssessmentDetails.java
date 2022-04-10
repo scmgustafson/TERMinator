@@ -1,10 +1,13 @@
 package com.abm2.UI;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
@@ -45,8 +48,12 @@ public class AssessmentDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_details);
         repo = new Repository(getApplication());
+        //Setup action bar
+        setContentView(R.layout.activity_assessment_details);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         //Set Assessment detailed information
         textTitle = findViewById(R.id.textAssessmentTitle);
         textEnd = findViewById(R.id.textAssessmentEnd);
@@ -76,6 +83,24 @@ public class AssessmentDetails extends AppCompatActivity {
         else {
             rbPerformance.setChecked(true);
         }
+    }
+
+    //Override standard Android back function to do a this.finish()
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    //Override standard actionbar back function to do a this.finish()
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onTextAssessmentEndClick(View view) {
