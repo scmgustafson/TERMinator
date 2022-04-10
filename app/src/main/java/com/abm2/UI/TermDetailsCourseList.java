@@ -314,11 +314,9 @@ public class TermDetailsCourseList extends AppCompatActivity {
         }
         else {
             //Check dates
-            if (newCourseEndDate.before(newCourseStartDate) || newCourseEndDate.equals(newCourseStartDate) ||
-                    ((sentTerm.getStartDate().after(newCourseStartDate)) || (sentTerm.getStartDate().after(newCourseEndDate))) ||
-                    ((sentTerm.getEndDate().before(newCourseStartDate)) || (sentTerm.getEndDate().before(newCourseEndDate)))) {
+            if (newCourseEndDate.before(newCourseStartDate) || newCourseEndDate.equals(newCourseStartDate)) {
                 //Set Toast error message then show to user
-                Toast toast = Toast.makeText(getApplication(), "Course end date must be after course start date and must be within term dates", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplication(), "Course end date must be after course start date", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }

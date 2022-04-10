@@ -26,18 +26,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private NoteViewHolder(View itemView) {
             super(itemView);
             noteItemView = itemView.findViewById(R.id.textListItem);
-            itemView.setOnLongClickListener(new View.OnLongClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public boolean onLongClick(View view) {
+                public void onClick(View view) {
                     //Get the current term that has been clicked using index of list (position)
                     int position = getAdapterPosition();
                     final Note currentNote = allNotes.get(position);
-                    Intent intent = new Intent(context, CourseDetailsAssessmentList.class);
+                    Intent intent = new Intent(context, NoteDetails.class);
                     intent.putExtra("noteId", currentNote.getNoteId());
                     intent.putExtra("text", currentNote.getText());
                     intent.putExtra("courseId", currentNote.getCourseId());
                     context.startActivity(intent);
-                    return true;
                 }
             });
         }

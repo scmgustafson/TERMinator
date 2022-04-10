@@ -165,6 +165,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
 
         //Populate recycler view with Assessment items from DB
         refreshAssessmentRecyclerView();
+        refreshNotesRecyclerView();
     }
 
     @Override
@@ -177,6 +178,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         refreshAssessmentRecyclerView();
+        refreshNotesRecyclerView();
     }
 
     @Override
@@ -291,6 +293,7 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     }
 
     public void onBtnAddNoteClick(View view) {
+        repo = new Repository(getApplication());
         //Read in new note value
         newNoteText = null;
         int courseId = sentCourse.getCourseId();

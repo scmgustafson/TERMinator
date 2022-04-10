@@ -30,6 +30,7 @@ public class NoteDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_note_details);
         //Set layout fields
         editNoteDetailsText = findViewById(R.id.editNoteDetailsText);
         //Populate Note fields and create sentNote objects
@@ -37,6 +38,8 @@ public class NoteDetails extends AppCompatActivity {
         sentText = getIntent().getStringExtra("text");
         sentCourseId = getIntent().getIntExtra("courseId", -1);
         sentNote = new Note(sentNoteId, sentText, sentCourseId);
+
+        editNoteDetailsText.setText(sentText);
     }
 
     //Override standard Android back function to do a this.finish()
