@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +68,13 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
     final Calendar NEW_ASS_CAL = Calendar.getInstance();
     //Set DB related fields
     Repository repo;
+    //Set course alert fields
+    private EditText editAlertStartDate;
+    private EditText editAlertEndDate;
+    private RadioButton rbCourseAlertStart;
+    private RadioButton rbCourseAlertEnd;
+    private Date alertCourseStartDate = new Date();
+    private Date alertCourseEndDate = new Date();
     //Set fields for new Note
     private String newNoteText;
     private EditText editNewNote;
@@ -142,6 +153,17 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         year = SENT_COURSE_CAL.get(Calendar.YEAR);
         courseEnd.setText((month+1)+"-"+date+"-"+year);
         editCourseStartDate.setTime(DateConverter.toTimestamp(sentStart));
+        editCourseEndDate.setTime((DateConverter.toTimestamp(sentEnd)));
+
+        //Set Course alert layout items
+        editAlertStartDate = findViewById(R.id.editCourseAlertStart);
+        editAlertEndDate = findViewById(R.id.editCourseAlertEnd);
+        editAlertStartDate.setText(String.valueOf(courseStart.getText()));
+        editAlertEndDate.setText(String.valueOf(courseEnd.getText()));
+        rbCourseAlertStart = findViewById(R.id.rbCourseStart);
+        rbCourseAlertEnd = findViewById(R.id.rbCourseEnd);
+        alertCourseStartDate.setTime(DateConverter.toTimestamp(sentStart));
+        alertCourseEndDate.setTime(DateConverter.toTimestamp(sentEnd));
 
         //Set new note layout items
         editNewNote = findViewById(R.id.editNoteText);
@@ -151,7 +173,6 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
         editNewAssessmentEndDate = findViewById(R.id.editNewAssessmentEndDate);
         rbNewObjective = findViewById(R.id.rbNewObjective);
         rbNewPerformance = findViewById(R.id.rbNewPerformance);
-        editCourseEndDate.setTime((DateConverter.toTimestamp(sentEnd)));
 
         //Populate recycler view with Assessment items from DB
         refreshAssessmentRecyclerView();
@@ -280,6 +301,76 @@ public class CourseDetailsAssessmentList extends AppCompatActivity {
 
         //Move to previous screen
         this.finish();
+    }
+
+    public void onCourseAlertStartDateClick(View view) {
+        EDIT_COURSE_CAL.setTime(sentStart);
+        date = EDIT_COURSE_CAL.get(Calendar.DATE);
+        month = EDIT_COURSE_CAL.get(Calendar.MONTH);
+        year = EDIT_COURSE_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CourseDetailsAssessmentList.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        editAlertStartDate.setText((month+1)+"-"+date+"-"+year);
+                        EDIT_COURSE_CAL.set(year, month, date);
+                        alertCourseStartDate.setTime(EDIT_COURSE_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onCourseAlertEndDateClick(View view) {
+        EDIT_COURSE_CAL.setTime(sentEnd);
+        date = EDIT_COURSE_CAL.get(Calendar.DATE);
+        month = EDIT_COURSE_CAL.get(Calendar.MONTH);
+        year = EDIT_COURSE_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CourseDetailsAssessmentList.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        editAlertEndDate.setText((month+1)+"-"+date+"-"+year);
+                        EDIT_COURSE_CAL.set(year, month, date);
+                        alertCourseEndDate.setTime(EDIT_COURSE_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onBtnSetCourseAlertClick(View view) {
+        //Check with date to use for the alert
+        if (rbCourseAlertStart.isChecked()) {
+            Intent intent = new Intent(CourseDetailsAssessmentList.this, Receiver.class);
+            intent.putExtra("msg", "Your course " + sentCourse.getTitle() + "'s start date is today at " + String.valueOf(editAlertStartDate.getText()) + "!");
+            PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsAssessmentList.this, MainActivity.numAlert++, intent, 0);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, DateConverter.toTimestamp(alertCourseStartDate), sender);
+
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "An alert for " + sentCourse.getTitle() + " start date has been set!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if (rbCourseAlertEnd.isChecked()) {
+            Intent intent = new Intent(CourseDetailsAssessmentList.this, Receiver.class);
+            intent.putExtra("msg", "Your course " + sentCourse.getTitle() + "'s end date is today at " + String.valueOf(editAlertEndDate.getText()) + "!");
+            PendingIntent sender = PendingIntent.getBroadcast(CourseDetailsAssessmentList.this, MainActivity.numAlert++, intent, 0);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, DateConverter.toTimestamp(alertCourseEndDate), sender);
+
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "An alert for " + sentCourse.getTitle() + " end date has been set!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else {
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "Start or end date must be checked", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
     }
 
     public void onBtnAddNoteClick(View view) {
