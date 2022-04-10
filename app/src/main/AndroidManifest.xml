@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2">
+        <receiver
+            android:name=".UI.Receiver"
+            android:enabled="true"
+            android:exported="true" />
         <activity
             android:name=".UI.NoteDetails"
             android:label="Note Details"

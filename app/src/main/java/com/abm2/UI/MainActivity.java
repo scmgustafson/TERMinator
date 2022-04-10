@@ -15,6 +15,7 @@ import com.abm2.R;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+    public static int numAlert = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

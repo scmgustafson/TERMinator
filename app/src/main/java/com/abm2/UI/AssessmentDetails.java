@@ -4,12 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,15 +39,23 @@ public class AssessmentDetails extends AppCompatActivity {
     private Long sentEndLong;
     private String sentType;
     private String sentCourseId;
-    //Fields for targetting TextView UI objects
+    //Fields for targetting detail Alert UI objects
     private TextView textTitle;
     private TextView textEnd;
     private TextView textCourse;
     private RadioButton rbObjective;
     private RadioButton rbPerformance;
+    //Fields for targeting Set Alert objects
+    private EditText editAlertStartDate;
+    private EditText editAlertEndDate;
+    private RadioButton rbStart;
+    private RadioButton rbEnd;
+    private Date alertStartDate = new Date();
+    private Date alertEndDate = new Date();
     //Set Date related information
     private Date endDate;
     final Calendar CAL = Calendar.getInstance();
+    final Calendar ALERT_CAL = Calendar.getInstance();
     //DB related fields
     Repository repo;
 
@@ -66,15 +80,22 @@ public class AssessmentDetails extends AppCompatActivity {
         endDate = DateConverter.toDate(sentEndLong);
         sentType = getIntent().getStringExtra("type");
         sentCourseId = getIntent().getStringExtra("course");
+        CAL.setTime(endDate);
+        ALERT_CAL.setTime(endDate);
 
         //Create Assessment object out of sent data
         sentAssessment = new Assessment(sentId, sentTitle, endDate, sentType, Integer.valueOf(sentCourseId));
 
-        CAL.setTime(endDate);
-
+        //Fields for targeting Set Alert UI objects
+        alertStartDate = DateConverter.toDate(sentEndLong);
+        alertEndDate = DateConverter.toDate(sentEndLong);
+        editAlertStartDate = findViewById(R.id.editAssessmentAlertStart);
+        editAlertEndDate = findViewById(R.id.editAssessmentAlertEndDate);
+        rbStart = findViewById(R.id.rbStartAlert);
+        rbEnd = findViewById(R.id.rbEndAlert);
+        editAlertStartDate.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
+        editAlertEndDate.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
         //Get course title based on course ID
-        List<Course> courses = repo.selectCourseById(Integer.valueOf(sentCourseId));
-        String courseTitle = courses.get(0).getTitle();
         textTitle.setText(sentTitle);
         textEnd.setText((CAL.get(Calendar.MONTH)+1)+"-"+(CAL.get(Calendar.DATE))+"-"+(CAL.get(Calendar.YEAR)));
         if (sentType.toLowerCase().equals("objective")) {
@@ -172,5 +193,73 @@ public class AssessmentDetails extends AppCompatActivity {
 
         //Move to previous screen
         this.finish();
+    }
+
+    public void onAlertStartDateClick(View view) {
+        int date = ALERT_CAL.get(Calendar.DATE);
+        int month = ALERT_CAL.get(Calendar.MONTH);
+        int year = ALERT_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AssessmentDetails.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        editAlertStartDate.setText((month+1)+"-"+date+"-"+year);
+                        ALERT_CAL.set(year, month, date);
+                        alertStartDate.setTime(ALERT_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onAlertEndDateClick(View view) {
+        int date = ALERT_CAL.get(Calendar.DATE);
+        int month = ALERT_CAL.get(Calendar.MONTH);
+        int year = ALERT_CAL.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AssessmentDetails.this, android.R.style.Theme_Holo_Light_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        editAlertEndDate.setText((month+1)+"-"+date+"-"+year);
+                        ALERT_CAL.set(year, month, date);
+                        alertEndDate.setTime(ALERT_CAL.getTimeInMillis());
+                    }
+                }, year, month, date);
+        datePickerDialog.show();
+    }
+
+    public void onBtnSetAlertClick(View view) {
+        //Check with date to use for the alert
+        if (rbStart.isChecked()) {
+            Intent intent = new Intent(AssessmentDetails.this, Receiver.class);
+            intent.putExtra("msg", "Your assessment " + sentAssessment.getTitle() + "'s start date is today at " + String.valueOf(editAlertStartDate.getText()) + "!");
+            PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetails.this, MainActivity.numAlert++, intent, 0);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, DateConverter.toTimestamp(alertStartDate), sender);
+
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "An alert for " + sentAssessment.getTitle() + " start date has been set!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if (rbEnd.isChecked()) {
+            Intent intent = new Intent(AssessmentDetails.this, Receiver.class);
+            intent.putExtra("msg", "Your assessment " + sentAssessment.getTitle() + "'s end date is today at " + String.valueOf(editAlertEndDate.getText()) + "!");
+            PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetails.this, MainActivity.numAlert++, intent, 0);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, DateConverter.toTimestamp(alertEndDate), sender);
+
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "An alert for " + sentAssessment.getTitle() + " end date has been set!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else {
+            //Display toast with confirmation message
+            Toast toast = Toast.makeText(getApplication(), "Start or end date must be checked", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
     }
 }
