@@ -1,5 +1,6 @@
 package com.abm2.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -107,6 +108,12 @@ public class NoteDetails extends AppCompatActivity {
     }
 
     public void onBtnShareNoteClick(View view) {
+        Intent sharingIntent = new Intent();
+        sharingIntent.setAction(Intent.ACTION_SEND);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, sentNote.getText());
+        sharingIntent.setType("text/plain");
 
+        Intent otherIntent = Intent.createChooser(sharingIntent, null);
+        startActivity(otherIntent);
     }
 }
